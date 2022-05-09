@@ -33,15 +33,6 @@ export class List extends Component {
         }
     }
     render() {
-        // return <section>
-        //     <ul>{this.state.movies.map((movie, key) =>
-        //     (<li key={key}>
-        //         {key + 1} - {movie.title}
-        //     </li>)
-        //     )}
-        //     </ul>
-        // </section>
-
         return (
             <div className='list'>{this.state.movies.map((movie, key) => (
                 <Card key={key} dataParentToChild={[movie, key]} />
