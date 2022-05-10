@@ -1,12 +1,11 @@
 @import url(../App.css);
 
 .list {
-    height: 65%;
+    height: 52.5%;
     width: 85%;
     display: flex;
     flex-wrap: wrap;
     background-color: var(--container-color);
-    /* border: 1px solid var(--border); */
     border-radius: 0.75rem;
     overflow-y: scroll;
     overflow-x: hidden;

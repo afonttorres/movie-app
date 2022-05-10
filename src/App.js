@@ -1,12 +1,13 @@
 import './App.css';
-import { List } from './components/list';
+import { List } from './components/List';
+import { Form } from './components/Form'
 
 function App() {
-    return (
-      <div className="wrapper">
-        <List />
-      </div>
-    );
-  }
+  return (
+    <div>
+      <List />
+    </div>
+  );
+}
 
 export default App;
