@@ -57,7 +57,7 @@ export class List extends Component {
                     <Card key={key} movie={movie} deleteItem={this.deleteItem} />
                 ))}
                 </div>
-                <Form addItem={this.addItem} />
+                <Form addItem={this.addItem} changeFlag = {this.changeFlag}/>
             </div>
         )
     }
