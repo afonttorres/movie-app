@@ -41,7 +41,6 @@ export class List extends Component {
         if (!confirmation) return;
         console.log(id)
         let newMovies = this.state.movies.filter(movie => movie.id !== id);
-        console.log(newMovies);
         this.setState({ movies: newMovies });
     }
     addItem = (item) => {
@@ -57,7 +56,7 @@ export class List extends Component {
                     <Card key={key} movie={movie} deleteItem={this.deleteItem} />
                 ))}
                 </div>
-                <Form addItem={this.addItem} changeFlag = {this.changeFlag}/>
+                <Form addItem={this.addItem} />
             </div>
         )
     }
