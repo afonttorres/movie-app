@@ -33,7 +33,9 @@ export class List extends Component {
                     valoration: 10,
                     imgUrl: 'https://m.media-amazon.com/images/M/MV5BNGYyZGM5MGMtYTY2Ni00M2Y1LWIzNjQtYWUzM2VlNGVhMDNhXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg'
                 },
-            ]
+            ],
+            formIsActive: false,
+            movieToPreview: '',
         }
     }
     deleteItem = (id) => {
@@ -47,16 +49,37 @@ export class List extends Component {
         let lastId = parseInt(this.state.movies[this.state.movies.length - 1].id);
         let newItem = { id: lastId + 1, ...item };
         let moviesAdded = [...this.state.movies, newItem];
-        this.setState({ movies: moviesAdded })
+        this.setState({ movies: moviesAdded , formIsActive: false})
     }
+
+    movieToPreview = (movie) => {
+        this.setState({ movieToPreview: movie });
+    }
+
+    updateItem = (movieToUpdate) => {
+        //console.log(movieToUpdate)
+        let movieIndex = this.state.movies.findIndex(movie => movie.id === movieToUpdate.id);
+        let updatedMovies = [...this.state.movies];
+        updatedMovies[movieIndex] = movieToUpdate;
+        this.setState({ movies: updatedMovies, movieToPreview: '' , formIsActive: false});
+
+    }
+
+    toggleForm = () => {
+        if (this.state.formIsActive) this.setState({ formIsActive: false })
+        else this.setState({ formIsActive: true })
+    }
+
     render() {
+        // console.log(this.state)
         return (
             <div className='wrapper'>
                 <div className='list'>{this.state.movies.map((movie, key) => (
-                    <Card key={key} movie={movie} deleteItem={this.deleteItem} />
+                    <Card key={key} movie={movie} deleteItem={this.deleteItem} toggleForm={this.toggleForm} movieToPreview={this.movieToPreview} />
                 ))}
                 </div>
-                <Form addItem={this.addItem} />
+                <button className={`form-button ${this.state.formIsActive ? 'form-button-inactive' : 'form-button-active'}`} onClick={this.toggleForm}>Add</button>
+                <Form addItem={this.addItem} formIsActive={this.state.formIsActive} movieToPreview={this.state.movieToPreview} updateItem={this.updateItem} />
             </div>
         )
     }

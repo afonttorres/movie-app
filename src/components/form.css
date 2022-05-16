@@ -10,6 +10,7 @@
     background-color: var(--beige);
     border-radius: .75rem;
     gap: 2.5%;
+    position: relative;
 }
 
 .input-container{
@@ -31,6 +32,11 @@
     font-family: var(--main-font);
 }
 
+::placeholder{
+    text-transform: capitalize;
+    color: var(--beige);
+}
+
 .button-container{
     height: 20%;
     text-align: center;
@@ -47,6 +53,30 @@
     color: var(--main-green);
     font-weight: 800;
     font-size: var(--main-font-size);
+    outline: none;
+    cursor: pointer;
+}
+
+.preview-container{
+    position: absolute;
+    height: 65%;
+    width: 40%;
+    top: 0;
+    left: 0;
+    margin: 2.5%;
+}
+
+.form-active, .preview-container-active{
+    display: block;
+}
+
+.form-inactive, .preview-container-inactive{
+    display: none;
+}
+
+.preview-active{
+    width: 60%;
+    margin: 0 0 0 40%;
 }
 
 @media only screen and (max-width: 820px) {

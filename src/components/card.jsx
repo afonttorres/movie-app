@@ -5,18 +5,21 @@ const { Component } = require('react');
 export class Card extends Component {
     constructor(props) {
         super(props)
-        
     }
     delete = (id)=> {
-        this.props.deleteItem(id)
+        this.props.deleteItem(id);
+    }
+    edit = (movie) =>{
+        this.props.toggleForm();
+        this.props.movieToPreview(movie);
     }
     render() {
-        //console.log(this.props)
         return (
             <div className="card">
                 <div className="img-container line">
                     <img className='img' src={this.props.movie.imgUrl} alt="" />
                     <button className='deleteButton' onClick={()=> this.delete(this.props.movie.id)}><i className="fa-solid fa-trash-can"></i></button>
+                    <button className='editButton' onClick={()=> this.edit(this.props.movie)}><i className="fa-solid fa-pen-to-square"></i></button>
                 </div>
                 <div className="info-row font line">
                     <div className="info-text-container line">

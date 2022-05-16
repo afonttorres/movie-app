@@ -89,7 +89,7 @@
     left: 0%;
     color: var(--wrapper-color);
 }
-.deleteButton{
+.deleteButton, .editButton{
     width: 20%;
     height: 20%;
     position: absolute;
@@ -103,6 +103,11 @@
     text-align: center;
     line-height: 2.5;
 }
+
+.editButton{
+    top: 30%;
+}
+
 .buttonSelected{
     color: var(--select-green);
 }

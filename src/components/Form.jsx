@@ -1,44 +1,39 @@
 import '../components/form.css';
 import React, { Component } from 'react';
+import { Preview } from './Preview';
 
 export class Form extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-            name: '',
-            genre: '',
-            year: '',
-            imgUrl: '',
-            valoration: ''
-        };
-
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-    handleInputChange = (event) => {
-        const target = event.target;
-        const name = target.name;
-        const value = target.value.toLowerCase();
+    handleInputChange = (e) => {
+        this.setState({});
 
-        this.setState({
-            [name]: value
-        });
+        const target = e.target;
+        let name = target.name;
+        let value = target.value.toLowerCase();
+
+        this.setState({ [name]: value });
+
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.addItem(this.state);
-        this.emptyInput();
+        let submitter = e.nativeEvent.submitter.value;
+
+        this.emptyInput(e);
+
+        if (submitter === 'ADD') this.addItem(this.state);
+        else this.updateItem(this.state);
+
     }
 
-    emptyInput = () =>{
-        this.setState({
-            name: '',
-            genre: '',
-            year: '',
-            imgUrl: '',
-            valoration: ''
-        })
+    emptyInput = (e) => {
+        for (let input of e.target.firstElementChild.children) {
+            input.value = '';
+        }
     }
 
     addItem = (state) => {
@@ -51,21 +46,29 @@ export class Form extends Component {
         alert('Movie added');
     }
 
+    updateItem = (state) => {
+        let movie = { ...state, id: this.props.movieToPreview.id }
+        this.props.updateItem(movie);
+    }
+
     render() {
+        //console.log(this.props)
         return (
-            <form className='form' onSubmit={this.handleSubmit}>
-                <div className="input-container">
-                    <input name="name" type="text" value={this.state.name} onChange={this.handleInputChange} placeholder="name"></input>
-                    <input name="genre" type="text" value={this.state.genre} onChange={this.handleInputChange} placeholder="genre"></input>
-                    <input name="year" type="text" value={this.state.year} onChange={this.handleInputChange} placeholder="year"></input>
-                    <input name="imgUrl" type="text" value={this.state.imgUrl} onChange={this.handleInputChange} placeholder="url"></input>
-                    <input name="valoration" type="text" value={this.state.valoration} onChange={this.handleInputChange} placeholder="valoration"></input>
+            <form className={`form ${this.props.formIsActive ? 'form-active' : 'form-inactive'}`} onSubmit={this.handleSubmit}>
+                <div className={`input-container ${this.props.movieToPreview ? 'preview-active' : ''}`}>
+                    <input name="name" type="text" onChange={this.handleInputChange} placeholder={this.props.movieToPreview ? this.props.movieToPreview.name : 'name'}></input>
+                    <input name="genre" type="text" onChange={this.handleInputChange} placeholder={this.props.movieToPreview ? this.props.movieToPreview.genre : 'genre'}></input>
+                    <input name="year" type="text" onChange={this.handleInputChange} placeholder={this.props.movieToPreview ? this.props.movieToPreview.year : 'year'}></input>
+                    <input name="imgUrl" type="text" onChange={this.handleInputChange} placeholder={this.props.movieToPreview ? this.props.movieToPreview.imgUrl : 'img url'}></input>
+                    <input name="valoration" type="text" onChange={this.handleInputChange} placeholder={this.props.movieToPreview ? this.props.movieToPreview.valoration : 'valoration'}></input>
                 </div>
-                <div className="button-container">
-                    <input type="submit" className="add-button" value="ADD" />
+                <div className={`button-container ${this.props.movieToPreview ? 'preview-active' : ''}`}>
+                    <input type="submit" className="add-button" value={this.props.movieToPreview ? 'EDIT' : 'ADD'} />
+                </div>
+                <div className={`preview-container ${this.props.movieToPreview ? 'preview-container-active' : 'preview-container-inactive'}`}>
+                    <Preview movie={this.props.movieToPreview} preview={this.state} />
                 </div>
             </form>
-
         )
     }
 }
@@ -90,3 +93,7 @@ export class Form extends Component {
 
 //     this.addItem(this.state);
 // }
+
+        // const target = event.target;
+        // const name = target.name;
+        // const value = target.value.toLowerCase();
