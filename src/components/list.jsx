@@ -24,7 +24,6 @@ export class List extends Component {
     deleteItem = (id) => {
         let confirmation = window.confirm('Are you sure?');
         if (!confirmation) return;
-        console.log(id)
         let newMovies = this.state.movies.filter(movie => movie.id !== id);
         this.setState({ movies: newMovies });
     }
@@ -49,14 +48,12 @@ export class List extends Component {
     }
 
     toggleForm = () => {
-        if (this.state.formIsActive) this.setState({ formIsActive: false })
-        else this.setState({ formIsActive: true })
+        this.setState({formIsActive:!this.state.formIsActive});
     }
 
     render() {
-        // console.log(this.state)
         return (
-            <div className='wrapper'>
+            <div className='container'>
                 <div className='list'>{this.state.movies.map((movie, key) => (
                     <Card key={key} movie={movie} deleteItem={this.deleteItem} toggleForm={this.toggleForm} movieToPreview={this.movieToPreview} />
                 ))}

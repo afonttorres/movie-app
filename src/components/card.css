@@ -89,7 +89,7 @@
     left: 0%;
     color: var(--wrapper-color);
 }
-.deleteButton, .editButton{
+.deleteButton, .editButton, .infoButton{
     width: 20%;
     height: 20%;
     position: absolute;
@@ -106,6 +106,10 @@
 
 .editButton{
     top: 30%;
+}
+
+.infoButton{
+    top: 50%;
 }
 
 .buttonSelected{

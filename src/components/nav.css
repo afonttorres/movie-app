@@ -1,0 +1,23 @@
+.nav{
+    height: 10%;
+    width: 100%;
+    background-color: black;
+}
+
+.nav-item-container{
+    width: 75%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+}
+.nav-item-container a, .nav-item{
+    display: contents;
+}
+.nav-item{
+    color: var(--beige);
+    font-size: larger;
+    font-weight: bold;
+}
+

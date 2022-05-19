@@ -48,6 +48,7 @@ export class Form extends Component {
 
     updateItem = (state) => {
         let movie = { ...state, id: this.props.movieToPreview.id }
+        //sanejar 
         this.props.updateItem(movie);
     }
 

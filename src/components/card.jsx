@@ -1,5 +1,7 @@
 import '../components/card.css';
-const { Component } = require('react');
+import { Link } from 'react-router-dom';
+import { Component } from 'react';
+
 
 
 export class Card extends Component {
@@ -20,6 +22,7 @@ export class Card extends Component {
                     <img className='img' src={this.props.movie.imgUrl} alt="" />
                     <button className='deleteButton' onClick={()=> this.delete(this.props.movie.id)}><i className="fa-solid fa-trash-can"></i></button>
                     <button className='editButton' onClick={()=> this.edit(this.props.movie)}><i className="fa-solid fa-pen-to-square"></i></button>
+                    <Link to='/card-info'><button className='infoButton' ><i className="fa-solid fa-info"></i></button></Link>
                 </div>
                 <div className="info-row font line">
                     <div className="info-text-container line">
