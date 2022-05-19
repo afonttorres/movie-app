@@ -9,9 +9,10 @@ export class List extends Component {
         super();
 
         this.state = {
-            movies:[],
+            movies: [],
             formIsActive: false,
             movieToPreview: '',
+            action: 'add'
         }
     }
 
@@ -26,12 +27,14 @@ export class List extends Component {
         if (!confirmation) return;
         let newMovies = this.state.movies.filter(movie => movie.id !== id);
         this.setState({ movies: newMovies });
+        alert('Movie erased');
     }
     addItem = (item) => {
         let lastId = parseInt(this.state.movies[this.state.movies.length - 1].id);
         let newItem = { id: lastId + 1, ...item };
         let moviesAdded = [...this.state.movies, newItem];
-        this.setState({ movies: moviesAdded, formIsActive: false })
+        this.setState({ movies: moviesAdded, movieToPreview: '', formIsActive: false, action: 'add', lastUpdatedMovie: newItem })
+        alert('Movie added')
     }
 
     movieToPreview = (movie) => {
@@ -39,27 +42,33 @@ export class List extends Component {
     }
 
     updateItem = (movieToUpdate) => {
-        //console.log(movieToUpdate)
         let movieIndex = this.state.movies.findIndex(movie => movie.id === movieToUpdate.id);
         let updatedMovies = [...this.state.movies];
         updatedMovies[movieIndex] = movieToUpdate;
-        this.setState({ movies: updatedMovies, movieToPreview: '', formIsActive: false });
-
+        this.setState({ movies: updatedMovies, movieToPreview: '', formIsActive: false, action: 'add', lastUpdatedMovie: movieToUpdate });
+        alert('Movie updated');
+        return;
     }
 
     toggleForm = () => {
-        this.setState({formIsActive:!this.state.formIsActive});
+        this.setState({ formIsActive: !this.state.formIsActive });
+    }
+
+    decideAction = (action) => {
+        this.setState({ action: action })
+        if (action === 'add') this.setState({ movieToPreview: '' });
     }
 
     render() {
+        // console.log(this.state)
         return (
             <div className='container'>
                 <div className='list'>{this.state.movies.map((movie, key) => (
-                    <Card key={key} movie={movie} deleteItem={this.deleteItem} toggleForm={this.toggleForm} movieToPreview={this.movieToPreview} />
+                    <Card key={key} movie={movie} deleteItem={this.deleteItem} toggleForm={this.toggleForm} movieToPreview={this.movieToPreview} decideAction={this.decideAction} action={this.state.action} />
                 ))}
                 </div>
                 <button className={`form-button ${this.state.formIsActive ? 'form-button-inactive' : 'form-button-active'}`} onClick={this.toggleForm}>Add</button>
-                <Form addItem={this.addItem} formIsActive={this.state.formIsActive} movieToPreview={this.state.movieToPreview} updateItem={this.updateItem} />
+                <Form addItem={this.addItem} toggleForm={this.toggleForm} formIsActive={this.state.formIsActive} movieToPreview={this.state.movieToPreview} updateItem={this.updateItem} onClick={() => this.decideAction('add')} action={this.state.action} lastMovie={this.state.lastUpdatedMovie} />
             </div>
         )
     }

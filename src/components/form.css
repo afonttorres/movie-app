@@ -38,7 +38,7 @@
 }
 
 .button-container{
-    height: 20%;
+    height: 15%;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -64,6 +64,22 @@
     top: 0;
     left: 0;
     margin: 2.5%;
+}
+
+.closeButton{
+    height: 10%;
+    font-size: small;
+    width: 9%;
+    text-align: center;
+    border-radius: 50%;
+    border: 2px solid var(--dark-green);
+    color: var(--dark-green);
+    font-weight: bold;
+    position: relative;
+    left: 85%;
+    top: 2%;
+    margin: 1%;
+    line-height: 3;
 }
 
 .form-active, .preview-container-active{

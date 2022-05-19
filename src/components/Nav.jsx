@@ -10,7 +10,7 @@ export class Nav extends Component {
         return (
             <nav className="nav">
                 <div className="nav-item-container">
-                    <Link to='/login'><p className='font nav-item'>Login</p></Link>
+                    <Link to='/login'><p className='font nav-item'>LOGIN</p></Link>
                 </div>
             </nav>
         )

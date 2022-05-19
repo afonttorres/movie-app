@@ -4,70 +4,93 @@ import { Preview } from './Preview';
 
 export class Form extends Component {
     constructor(props) {
-        super(props)
-        this.handleInputChange = this.handleInputChange.bind(this);
+        super(props);
+        //this.state = {movie: this.props.movieToPreview}
+        //this.handleInputChange = this.handleInputChange.bind(this);
     }
 
     handleInputChange = (e) => {
         this.setState({});
 
-        const target = e.target;
-        let name = target.name;
-        let value = target.value.toLowerCase();
+        let name = e.target.name;
+        let value = e.target.value.toLowerCase();
 
         this.setState({ [name]: value });
+        //this.setState({ movie: { ...this.state.movieToPreview, [name]: value } });
 
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
         let submitter = e.nativeEvent.submitter.value;
+        console.log(e.nativeEvent.submitter)
 
         this.emptyInput(e);
 
-        if (submitter === 'ADD') this.addItem(this.state);
-        else this.updateItem(this.state);
-
+        if (submitter === 'add' && this.props.action === 'add') {
+            this.addItem(this.state);
+            console.log(submitter, this.props.action);
+            return;
+        }
+        else {
+            console.log(submitter, this.props.action);
+            this.updateItem(this.state);
+            return;
+        }
     }
 
     emptyInput = (e) => {
-        for (let input of e.target.firstElementChild.children) {
+        let inputs = document.querySelectorAll('input')
+        for (let input of inputs) {
             input.value = '';
+        }
+        //this.setState({ movie: { id: '', name: '', genre: '', year: '', valoration: '', imgUrl: '' } })
+    }
+
+    sanitize = (obj) => {
+        for (let key in obj) {
+            if (obj[key] === '' || obj[key] === undefined || obj[key] === null) return;
+            if (typeof obj[key] !== 'string') return;
         }
     }
 
     addItem = (state) => {
-        let newItem = state
-        for (let key in newItem) {
-            if (newItem[key] === '') return;
-            if (typeof newItem[key] !== 'string') return;
-        }
+        this.setState(null);
+        let newItem = state;
+        this.sanitize(newItem);
         this.props.addItem(newItem);
-        alert('Movie added');
     }
 
     updateItem = (state) => {
-        let movie = { ...state, id: this.props.movieToPreview.id }
-        //sanejar 
-        this.props.updateItem(movie);
+        this.setState(null);
+        let movie = { ...state, id: this.props.movieToPreview.id };
+        this.sanitize(movie);
+        for (let key in movie) {
+            if (movie[key] !== this.props.movieToPreview[key]) this.props.updateItem(movie);
+            else alert('Changes not found'); return;
+        }
     }
 
     render() {
-        //console.log(this.props)
+        // console.log(this.state)
+        // console.log(this.props.movieToPreview)
+
+        let val = this.props.action === 'add' ? 'add' : 'edit';
         return (
             <form className={`form ${this.props.formIsActive ? 'form-active' : 'form-inactive'}`} onSubmit={this.handleSubmit}>
-                <div className={`input-container ${this.props.movieToPreview ? 'preview-active' : ''}`}>
-                    <input name="name" type="text" onChange={this.handleInputChange} placeholder={this.props.movieToPreview ? this.props.movieToPreview.name : 'name'}></input>
-                    <input name="genre" type="text" onChange={this.handleInputChange} placeholder={this.props.movieToPreview ? this.props.movieToPreview.genre : 'genre'}></input>
-                    <input name="year" type="text" onChange={this.handleInputChange} placeholder={this.props.movieToPreview ? this.props.movieToPreview.year : 'year'}></input>
-                    <input name="imgUrl" type="text" onChange={this.handleInputChange} placeholder={this.props.movieToPreview ? this.props.movieToPreview.imgUrl : 'img url'}></input>
-                    <input name="valoration" type="text" onChange={this.handleInputChange} placeholder={this.props.movieToPreview ? this.props.movieToPreview.valoration : 'valoration'}></input>
+                {this.props.action === 'add' ? <p className='closeButton' onClick={() => this.props.toggleForm()}><i className="fa-solid fa-x"></i></p> : null}
+                <div className={`input-container ${this.props.movieToPreview && this.props.action === 'edit' ? 'preview-active' : ''}`}>
+                    <input name="name" type="text" onChange={this.handleInputChange} placeholder={this.props.movieToPreview && this.props.action === 'edit' ? this.props.movieToPreview.name : 'name'}></input>
+                    <input name="genre" type="text" onChange={this.handleInputChange} placeholder={this.props.movieToPreview && this.props.action === 'edit' ? this.props.movieToPreview.genre : 'genre'}></input>
+                    <input name="year" type="text" onChange={this.handleInputChange} placeholder={this.props.movieToPreview && this.props.action === 'edit' ? this.props.movieToPreview.year : 'year'}></input>
+                    <input name="imgUrl" type="text" onChange={this.handleInputChange} placeholder={this.props.movieToPreview && this.props.action === 'edit' ? this.props.movieToPreview.imgUrl : 'img url'}></input>
+                    <input name="valoration" type="text" onChange={this.handleInputChange} placeholder={this.props.movieToPreview && this.props.action === 'edit' ? this.props.movieToPreview.valoration : 'valoration'}></input>
                 </div>
-                <div className={`button-container ${this.props.movieToPreview ? 'preview-active' : ''}`}>
-                    <input type="submit" className="add-button" value={this.props.movieToPreview ? 'EDIT' : 'ADD'} />
+                <div className={`button-container ${this.props.movieToPreview && this.props.action === 'edit' ? 'preview-active' : ''}`}>
+                    <button type="submit" className="add-button" value={val}>{val.toLocaleUpperCase()}</button>
                 </div>
-                <div className={`preview-container ${this.props.movieToPreview ? 'preview-container-active' : 'preview-container-inactive'}`}>
-                    <Preview movie={this.props.movieToPreview} preview={this.state} />
+                <div className={`preview-container ${this.props.movieToPreview && this.props.action === 'edit' ? 'preview-container-active' : 'preview-container-inactive'}`}>
+                    <Preview movie={this.props.movieToPreview} preview={this.state} lastMovie={this.props.lastMovie} />
                 </div>
             </form>
         )
@@ -94,7 +117,3 @@ export class Form extends Component {
 
 //     this.addItem(this.state);
 // }
-
-        // const target = event.target;
-        // const name = target.name;
-        // const value = target.value.toLowerCase();
