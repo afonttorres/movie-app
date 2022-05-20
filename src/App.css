@@ -8,7 +8,8 @@
     --main-green: #52796f;
     --select-green: #84a98c;
     --beige: #cad2c5;
-    --opacity: rgba(255, 255, 255, 10%);
+    --beig-opacity: rgba(202,210,197, 50%);
+    --opacity: rgba(255, 255, 255, 50%);
 
     --black : rgb(0,0,0);
     --gray: rgb(102, 102, 102);
@@ -17,9 +18,9 @@
     --netflix-red: rgb(229, 9, 20);
 
     /*elements*/
-    --wrapper-color: var(--darkest);
-    --container-color: var(--dark-green);
-    --main-font-color: var(--beige);
+    --wrapper-color: var(--beige);
+    --container-color: var(--opacity);
+    --main-font-color: var(--dark-green);
     --border-color: var(--light-gray);
     --main-font: 'Crimson Pro', serif;;
     --border-radius: .75rem;

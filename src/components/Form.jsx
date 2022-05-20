@@ -5,17 +5,18 @@ import { Preview } from './Preview';
 export class Form extends Component {
     constructor(props) {
         super(props);
-        this.state = { movie: this.props.movieToPreview, isEditMode: this.props.isEditMode }
-        //this.handleInputChange = this.handleInputChange.bind(this);
+        
     }
 
+
     handleInputChange = (e) => {
-        this.setState({});
+        this.setState({movie:{}});
 
         let name = e.target.name;
         let value = e.target.value.toLowerCase();
 
-        this.setState({ [name]: value });
+        this.setState({ movie: { ...this.state.movie, [name]: value } });
+
         //this.setState({ movie: { ...this.state.movieToPreview, [name]: value } });
 
     }
@@ -23,18 +24,16 @@ export class Form extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         let submitter = e.nativeEvent.submitter.value;
-        console.log(e.nativeEvent.submitter)
-
         this.emptyInput(e);
 
         if (submitter === 'add' && this.props.isEditMode === false) {
-            this.addItem(this.state);
-            console.log(submitter, this.props.isEditMode);
+            this.addItem(this.state.movie);
+            // console.log(submitter, this.props.isEditMode);
             return;
         }
         else {
-            console.log(submitter, this.props.isEditMode);
-            this.updateItem(this.state);
+            // console.log(submitter, this.props.isEditMode);
+            this.updateItem(this.state.movie);
             return;
         }
     }
@@ -72,8 +71,8 @@ export class Form extends Component {
     }
 
     render() {
-        console.log(this.state)
-        console.log(this.props)
+        // console.log(this.state)
+        // console.log(this.props)
 
         let val = this.props.isEditMode === false ? 'add' : 'edit';
         return (
@@ -106,6 +105,8 @@ export class Form extends Component {
 //Aleshores caldria modificar l'state i dir-li que cada clau de l'state és un dels valors dels nostres
 //inputs. Després caldira citar la nostra funció del props i passar-li l'objecte que hem creat amb el valor
 //dels inputs perquè l'afegís a l'state del List Component.
+
+//this.handleInputChange = this.handleInputChange.bind(this);
 
 // handleSubmit = (e) => {
 //     e.preventDefault();

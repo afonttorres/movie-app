@@ -17,7 +17,7 @@ export class Card extends Component {
     }
     render() {
         return (
-            <div className="card">
+            <div className="card" id={this.props.movie.id}>
                 <div className="img-container line">
                     <img className='img' src={this.props.movie.imgUrl} alt="" />
                     <button className='deleteButton' onClick={()=> this.delete(this.props.movie.id)}><i className="fa-solid fa-trash-can"></i></button>

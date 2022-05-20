@@ -22,7 +22,7 @@ export class Preview extends Component {
                 if (preview[key] !== movieToUpdate[key]) movie[key] = preview[key];
             } else {
                 if (preview[key] !== movieToUpdate[key] && preview[key] !== lastMovie[key]) {
-                    console.log(lastMovie[key], preview[key]);
+                    // console.log(lastMovie[key], preview[key]);
                     movie[key] = preview[key]
                 }
             }

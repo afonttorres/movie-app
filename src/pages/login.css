@@ -9,7 +9,7 @@
 
 .login-container * {
     display: contents;
-    color: var(--beige);
+    color: var(--main-green);
 }
 
 .backButton{

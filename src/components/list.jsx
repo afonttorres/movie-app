@@ -11,7 +11,7 @@ export class List extends Component {
         this.state = {
             movies: [],
             formIsActive: false,
-            movieToPreview: '',
+            movieToPreview: {},
             isEditMode: false
         }
     }
@@ -35,16 +35,40 @@ export class List extends Component {
         })
     }
 
+    addLoop = () => {
+        let movie = {
+            name: "shrek",
+            genre: "animación, aventura, comedia",
+            year: "2001",
+            valoration: "9.5",
+            imgUrl: "https://enfilme.com/img/content/schrek_poster_Enfilme_v3024_675_489.jpeg"
+        }
+        for (let i = 0; i < 5; i++) {
+            this.addItem(movie)
+        }
+    }
+
     addItem = (item) => {
-        let lastId = parseInt(this.state.movies[this.state.movies.length - 1].id);
-        let newItem = { id: lastId + 1, ...item };
-        let moviesAdded = [...this.state.movies, newItem];
-        this.setState({ movies: moviesAdded, movieToPreview: '', formIsActive: false, isEditMode: false, lastUpdatedMovie: newItem })
-        alert('Movie added')
+        movieServices.postMovie(item).then(res => {
+            if (res.id) this.getData();
+            alert(`${res.name} added! Movie id: ${res.id}`);
+            this.setState({ movieToPreview: {}, formIsActive: false, isEditMode: false, lastUpdatedMovie: res });
+
+        })
+        console.log('inside addItem:', this.state);
+        // let lastId = parseInt(this.state.movies[this.state.movies.length - 1].id);
+        // let newItem = { id: lastId + 1, ...item };
+        // let moviesAdded = [...this.state.movies, newItem];
+        // this.setState({ movies: moviesAdded, movieToPreview: '', formIsActive: false, isEditMode: false, lastUpdatedMovie: newItem })
+        // alert('Movie added')
     }
 
     nextMovieToPreview = (movie) => {
         this.setState({ movieToPreview: movie, isEditMode: true });
+    }
+
+    exitEditMode = () => {
+        this.setState({ isEditMode: false })
     }
 
     updateItem = (movieToUpdate) => {
@@ -62,13 +86,14 @@ export class List extends Component {
 
 
     render() {
+        console.log('On render:', this.state);
         return (
             <div className='container'>
                 <div className='list'>{this.state.movies.map((movie, key) => (
                     <Card key={key} movie={movie} deleteItem={this.deleteItem} toggleForm={this.toggleForm} nextMovieToPreview={this.nextMovieToPreview} />
                 ))}
                 </div>
-                <button className={`form-button ${this.state.formIsActive ? 'form-button-inactive' : 'form-button-active'}`} onClick={this.toggleForm}>Add</button>
+                <button className={`form-button ${this.state.formIsActive ? 'form-button-inactive' : 'form-button-active'}`} onClick={() => { this.toggleForm(); this.exitEditMode() }}>Add</button>
                 <Form addItem={this.addItem} toggleForm={this.toggleForm} formIsActive={this.state.formIsActive} movieToPreview={this.state.movieToPreview} updateItem={this.updateItem} isEditMode={this.state.isEditMode} lastMovie={this.state.lastUpdatedMovie} />
             </div>
         )

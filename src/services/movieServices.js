@@ -17,5 +17,13 @@ export const movieServices = {
         })
 
         return deleteMovie;
+    },
+
+    postMovie(movie){
+        const postMovie = axios.post(`${baseURL}/movies`, movie).then(res =>{
+            return res.data;
+        })
+
+        return postMovie;
     }
 }
