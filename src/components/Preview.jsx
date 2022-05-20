@@ -16,7 +16,7 @@ export class Preview extends Component {
         else preview = {};
         
         let movie = {...movieToUpdate};
-        console.log(preview)
+        // console.log(preview)
         for (let key in preview) {
             if (!lastMovie) {
                 if (preview[key] !== movieToUpdate[key]) movie[key] = preview[key];

@@ -13,9 +13,7 @@ export class Card extends Component {
     }
     edit = (movie) =>{
         this.props.toggleForm();
-        this.props.movieToPreview(movie);
-        if(this.props.action === 'add') this.props.decideAction('edit')
-        else this.props.decideAction('add')
+        this.props.nextMovieToPreview(movie);
     }
     render() {
         return (

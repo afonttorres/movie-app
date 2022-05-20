@@ -5,7 +5,7 @@ import { Preview } from './Preview';
 export class Form extends Component {
     constructor(props) {
         super(props);
-        //this.state = {movie: this.props.movieToPreview}
+        this.state = { movie: this.props.movieToPreview, isEditMode: this.props.isEditMode }
         //this.handleInputChange = this.handleInputChange.bind(this);
     }
 
@@ -27,13 +27,13 @@ export class Form extends Component {
 
         this.emptyInput(e);
 
-        if (submitter === 'add' && this.props.action === 'add') {
+        if (submitter === 'add' && this.props.isEditMode === false) {
             this.addItem(this.state);
-            console.log(submitter, this.props.action);
+            console.log(submitter, this.props.isEditMode);
             return;
         }
         else {
-            console.log(submitter, this.props.action);
+            console.log(submitter, this.props.isEditMode);
             this.updateItem(this.state);
             return;
         }
@@ -72,24 +72,26 @@ export class Form extends Component {
     }
 
     render() {
-        // console.log(this.state)
-        // console.log(this.props.movieToPreview)
+        console.log(this.state)
+        console.log(this.props)
 
-        let val = this.props.action === 'add' ? 'add' : 'edit';
+        let val = this.props.isEditMode === false ? 'add' : 'edit';
         return (
             <form className={`form ${this.props.formIsActive ? 'form-active' : 'form-inactive'}`} onSubmit={this.handleSubmit}>
-                {this.props.action === 'add' ? <p className='closeButton' onClick={() => this.props.toggleForm()}><i className="fa-solid fa-x"></i></p> : null}
-                <div className={`input-container ${this.props.movieToPreview && this.props.action === 'edit' ? 'preview-active' : ''}`}>
-                    <input name="name" type="text" onChange={this.handleInputChange} placeholder={this.props.movieToPreview && this.props.action === 'edit' ? this.props.movieToPreview.name : 'name'}></input>
-                    <input name="genre" type="text" onChange={this.handleInputChange} placeholder={this.props.movieToPreview && this.props.action === 'edit' ? this.props.movieToPreview.genre : 'genre'}></input>
-                    <input name="year" type="text" onChange={this.handleInputChange} placeholder={this.props.movieToPreview && this.props.action === 'edit' ? this.props.movieToPreview.year : 'year'}></input>
-                    <input name="imgUrl" type="text" onChange={this.handleInputChange} placeholder={this.props.movieToPreview && this.props.action === 'edit' ? this.props.movieToPreview.imgUrl : 'img url'}></input>
-                    <input name="valoration" type="text" onChange={this.handleInputChange} placeholder={this.props.movieToPreview && this.props.action === 'edit' ? this.props.movieToPreview.valoration : 'valoration'}></input>
+                {this.props.isEditMode === false ? <p className='closeButton' onClick={() => this.props.toggleForm()}><i className="fa-solid fa-x"></i></p> : null}
+                <div className={`input-container ${this.props.movieToPreview && this.props.isEditMode === true ? 'preview-active' : ''}`}>
+                    <input name="name" type="text" onChange={this.handleInputChange} placeholder={this.props.movieToPreview && this.props.isEditMode === true ? this.props.movieToPreview.name : 'name'}></input>
+                    <input name="genre" type="text" onChange={this.handleInputChange} placeholder={this.props.movieToPreview && this.props.isEditMode === true ? this.props.movieToPreview.genre : 'genre'}></input>
+                    <input name="year" type="text" onChange={this.handleInputChange} placeholder={this.props.movieToPreview && this.props.isEditMode === true ? this.props.movieToPreview.year : 'year'}></input>
+                    <input name="imgUrl" type="text" onChange={this.handleInputChange} placeholder={this.props.movieToPreview && this.props.isEditMode === true ? this.props.movieToPreview.imgUrl : 'img url'}></input>
+                    <input name="valoration" type="text" onChange={this.handleInputChange} placeholder={this.props.movieToPreview && this.props.isEditMode === true ? this.props.movieToPreview.valoration : 'valoration'}></input>
                 </div>
-                <div className={`button-container ${this.props.movieToPreview && this.props.action === 'edit' ? 'preview-active' : ''}`}>
+
+                <div className={`button-container ${this.props.movieToPreview && this.props.isEditMode === true ? 'preview-active' : ''}`}>
                     <button type="submit" className="add-button" value={val}>{val.toLocaleUpperCase()}</button>
                 </div>
-                <div className={`preview-container ${this.props.movieToPreview && this.props.action === 'edit' ? 'preview-container-active' : 'preview-container-inactive'}`}>
+
+                <div className={`preview-container ${this.props.movieToPreview && this.props.isEditMode === true ? 'preview-container-active' : 'preview-container-inactive'}`}>
                     <Preview movie={this.props.movieToPreview} preview={this.state} lastMovie={this.props.lastMovie} />
                 </div>
             </form>

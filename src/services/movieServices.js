@@ -1,8 +1,21 @@
 import movies from '../data.json';
 import axios from 'axios';
 
+const baseURL = 'https://6286352d96bccbf32d713c70.mockapi.io'
+
 export const movieServices = {
     getAllMovies() {
-        return movies
+        const movies = axios.get(`${baseURL}/movies`).then(res => {
+            return res.data
+        })
+        return movies;
+    },
+
+    deleteMovie(id){
+        const deleteMovie = axios.delete(`${baseURL}/movies/${id}`).then(res=>{
+            return res.data
+        })
+
+        return deleteMovie;
     }
 }
