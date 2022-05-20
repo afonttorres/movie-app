@@ -1,4 +1,4 @@
-import movies from '../data.json';
+// import movies from '../data.json';
 import axios from 'axios';
 
 const baseURL = 'https://6286352d96bccbf32d713c70.mockapi.io'

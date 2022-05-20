@@ -69,30 +69,29 @@
 }
 
 .closeButton {
+    display: block;
     height: 10%;
-    font-size: small;
     width: 9%;
-    text-align: center;
-    border-radius: 50%;
-    border: 2px solid var(--dark-green);
-    color: var(--dark-green);
-    font-weight: bold;
     position: relative;
-    left: 85%;
+    left: 30%;
     top: 2%;
     margin: 1%;
     line-height: 3;
+    text-align: center;
+    font-weight: bold;
+    font-size: small;
+    border-radius: 50%;
+    border: 2px solid var(--dark-green);
+    color: var(--dark-green);    
 }
 
-.form-active,
-.preview-container-active {
+/* .preview-container-active {
     display: block;
 }
 
-.form-inactive,
 .preview-container-inactive {
     display: none;
-}
+} */
 
 .preview-active {
     width: 60%;

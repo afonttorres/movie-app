@@ -52,15 +52,10 @@ export class List extends Component {
         movieServices.postMovie(item).then(res => {
             if (res.id) this.getData();
             alert(`${res.name} added! Movie id: ${res.id}`);
-            this.setState({ movieToPreview: {}, formIsActive: false, isEditMode: false, lastUpdatedMovie: res });
+            this.setState({ movieToPreview: {}, formIsActive: false, isEditMode: false });
 
         })
         console.log('inside addItem:', this.state);
-        // let lastId = parseInt(this.state.movies[this.state.movies.length - 1].id);
-        // let newItem = { id: lastId + 1, ...item };
-        // let moviesAdded = [...this.state.movies, newItem];
-        // this.setState({ movies: moviesAdded, movieToPreview: '', formIsActive: false, isEditMode: false, lastUpdatedMovie: newItem })
-        // alert('Movie added')
     }
 
     nextMovieToPreview = (movie) => {
@@ -68,14 +63,14 @@ export class List extends Component {
     }
 
     exitEditMode = () => {
-        this.setState({ isEditMode: false })
+        this.setState({ isEditMode: false, movieToPreview: {} })
     }
 
     updateItem = (movieToUpdate) => {
         let movieIndex = this.state.movies.findIndex(movie => movie.id === movieToUpdate.id);
         let updatedMovies = [...this.state.movies];
         updatedMovies[movieIndex] = movieToUpdate;
-        this.setState({ movies: updatedMovies, movieToPreview: '', formIsActive: false, isEditMode: false, lastUpdatedMovie: movieToUpdate });
+        this.setState({ movies: updatedMovies, movieToPreview: {}, formIsActive: false, isEditMode: false });
         alert('Movie updated');
         return;
     }
@@ -86,15 +81,20 @@ export class List extends Component {
 
 
     render() {
-        console.log('On render:', this.state);
         return (
             <div className='container'>
                 <div className='list'>{this.state.movies.map((movie, key) => (
                     <Card key={key} movie={movie} deleteItem={this.deleteItem} toggleForm={this.toggleForm} nextMovieToPreview={this.nextMovieToPreview} />
                 ))}
                 </div>
-                <button className={`form-button ${this.state.formIsActive ? 'form-button-inactive' : 'form-button-active'}`} onClick={() => { this.toggleForm(); this.exitEditMode() }}>Add</button>
-                <Form addItem={this.addItem} toggleForm={this.toggleForm} formIsActive={this.state.formIsActive} movieToPreview={this.state.movieToPreview} updateItem={this.updateItem} isEditMode={this.state.isEditMode} lastMovie={this.state.lastUpdatedMovie} />
+                {!this.state.formIsActive ?
+                    <button className='form-button' onClick={() => { this.toggleForm(); this.exitEditMode() }}>Add</button>
+                    : null}
+
+                {this.state.formIsActive ?
+                    <Form addItem={this.addItem} toggleForm={this.toggleForm} formIsActive={this.state.formIsActive} movieToPreview={this.state.movieToPreview} updateItem={this.updateItem} isEditMode={this.state.isEditMode} />
+                    : null}
+
             </div>
         )
     }
