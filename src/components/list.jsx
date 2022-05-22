@@ -63,16 +63,18 @@ export class List extends Component {
     }
 
     exitEditMode = () => {
-        this.setState({ isEditMode: false, movieToPreview: {} })
+        this.setState({ isEditMode: false, movieToPreview: {}, formIsActive: false })
     }
 
-    updateItem = (movieToUpdate) => {
-        let movieIndex = this.state.movies.findIndex(movie => movie.id === movieToUpdate.id);
-        let updatedMovies = [...this.state.movies];
-        updatedMovies[movieIndex] = movieToUpdate;
-        this.setState({ movies: updatedMovies, movieToPreview: {}, formIsActive: false, isEditMode: false });
-        alert('Movie updated');
-        return;
+    updateItem = (movieToUpdate, id) => {
+        let movie = { ...movieToUpdate }
+        delete movie.id;
+        movieServices.updateMovie(parseInt(id), movie).then(res => {
+            if (res.id) this.getData();
+            alert(`${res.name} updated! Movie id: ${res.id}`)
+            this.exitEditMode();
+        })
+        console.log('inside updateItem:', this.state)
     }
 
     toggleForm = () => {
@@ -81,6 +83,7 @@ export class List extends Component {
 
 
     render() {
+        console.log('on render:', this.state)
         return (
             <div className='container'>
                 <div className='list'>{this.state.movies.map((movie, key) => (

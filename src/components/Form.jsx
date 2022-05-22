@@ -27,21 +27,15 @@ export class Form extends Component {
 
         if (submitter === 'add' && this.props.isEditMode === false) {
             this.addItem(this.state.movie);
-            // console.log(submitter, this.props.isEditMode);
             return;
         }
         else {
-            // console.log(submitter, this.props.isEditMode);
             this.updateItem(this.state.movie);
             return;
         }
     }
 
     emptyInput = (e) => {
-        // let inputs = document.querySelectorAll('input')
-        // for (let input of inputs) {
-        //     input.value = '';
-        // }
         this.setState({ movie: { id: '', name: '', genre: '', year: '', valoration: '', imgUrl: '' } })
     }
 
@@ -61,18 +55,15 @@ export class Form extends Component {
 
     updateItem = (state) => {
         this.setState(null);
-        let movie = { ...state, id: this.props.movieToPreview.id };
+        let movie = state;
         this.sanitize(movie);
         for (let key in movie) {
-            if (movie[key] !== this.props.movieToPreview[key]) this.props.updateItem(movie);
+            if (movie[key] !== this.props.movieToPreview[key]) this.props.updateItem(movie, this.props.movieToPreview.id)
             else alert('Changes not found'); return;
         }
     }
 
     render() {
-        // console.log('state:', this.state)
-        // console.log('props:', this.props)
-
         let val = this.props.isEditMode === false ? 'add' : 'edit';
 
         return (
@@ -95,7 +86,7 @@ export class Form extends Component {
 
                 {this.props.movieToPreview && this.props.isEditMode ?
                     <div className='preview-container'>
-                        <Preview movieToPreview={this.props.movieToPreview} previewData={this.state.movie}/>
+                        <Preview movieToPreview={this.props.movieToPreview} previewData={this.state.movie} />
                     </div>
                     : null}
 
