@@ -34,6 +34,7 @@ export class List extends Component {
             alert(`Movie: ${res.name} erased`);
         })
         this.exitEditMode();
+        this.setState({formIsActive: false});
     }
 
     addLoop = () => {
@@ -54,6 +55,7 @@ export class List extends Component {
             if (res) this.getData();
             alert(`${res.name} added! Movie id: ${res.id}`);
            this.exitEditMode();
+           this.setState({formIsActive: false});
         })
         console.log('inside addItem:', this.state);
     }
@@ -63,7 +65,7 @@ export class List extends Component {
     }
 
     exitEditMode = () => {
-        this.setState({ isEditMode: false, movieToPreview: {}, formIsActive: false })
+        this.setState({ isEditMode: false, movieToPreview: {} })
     }
 
     updateItem = (movieToUpdate, id) => {
@@ -73,6 +75,7 @@ export class List extends Component {
             if (res) this.getData();
             alert(`${res.name} updated! Movie id: ${res.id}`)
             this.exitEditMode();
+            this.setState({formIsActive: false});
         })
         console.log('inside updateItem:', this.state)
     }
@@ -83,7 +86,7 @@ export class List extends Component {
 
 
     render() {
-        //console.log('on render:', this.state)
+        // console.log('on render:', this.state)
         return (
             <div className='container'>
                 <div className='list'>{this.state.movies.map((movie, key) => (

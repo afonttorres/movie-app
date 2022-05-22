@@ -70,15 +70,16 @@ export class Form extends Component {
     }
 
     render() {
-        let val = this.props.isEditMode === false ? 'add' : 'edit';
+        console.log(this.state.movie)
+        let val = this.state.isEditMode === false ? 'add' : 'edit';
 
         return (
             <form className='form' onSubmit={this.handleSubmit}>
-                {this.props.isEditMode === false ?
+                {this.state.isEditMode === false ?
                     <p className='closeButton' onClick={() => this.props.toggleForm()}><i className="fa-solid fa-x"></i></p>
                     : null}
 
-                <div className={`input-container ${this.props.movieToPreview && this.props.isEditMode === true ? 'preview-active' : ''}`}>
+                <div className={`input-container ${this.state.movie && this.state.isEditMode === true ? 'preview-active' : ''}`}>
                     <input name="name" type="text" onChange={this.handleInputChange} value={this.state.movie.name} placeholder='name'></input>
                     <input name="genre" type="text" onChange={this.handleInputChange} value={this.state.movie.genre} placeholder='genre'></input>
                     <input name="year" type="text" onChange={this.handleInputChange} value={this.state.movie.year} placeholder='year'></input>
@@ -86,13 +87,13 @@ export class Form extends Component {
                     <input name="valoration" type="text" onChange={this.handleInputChange} value={this.state.movie.valoration} placeholder='valoration'></input>
                 </div>
 
-                <div className={`button-container ${this.props.movieToPreview && this.props.isEditMode ? 'preview-active' : ''}`}>
+                <div className={`button-container ${this.state.movieToPreview && this.state.isEditMode ? 'preview-active' : ''}`}>
                     <button type="submit" className="add-button" value={val}>{val.toLocaleUpperCase()}</button>
                 </div>
 
-                {this.props.movieToPreview && this.props.isEditMode ?
+                {this.state.movie && this.state.isEditMode ?
                     <div className='preview-container'>
-                        <Preview movieToPreview={this.props.movieToPreview} previewData={this.state.movie} />
+                        <Preview movieToPreview={this.state.movie} previewData={this.state.movie} />
                     </div>
                     : null}
 

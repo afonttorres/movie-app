@@ -5,16 +5,13 @@ export class Preview extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            previewData: this.props.previewData,
             preview: this.props.movieToPreview
         }
     }
 
     componentDidUpdate() {
-        this.state.previewData = this.props.previewData;
-
         let preview = { ...this.state.preview };
-        Object.keys(preview).forEach(key => preview[key] = this.state.previewData[key]);
+        Object.keys(preview).forEach(key => preview[key] = this.props.previewData[key]);
 
         this.state.preview = preview;
 
