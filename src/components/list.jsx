@@ -30,9 +30,10 @@ export class List extends Component {
         let confirmation = window.confirm('Are you sure?');
         if (!confirmation) return;
         movieServices.deleteMovie(parseInt(id)).then(res => {
-            if (res.name) this.getData();
+            if (res) this.getData();
             alert(`Movie: ${res.name} erased`);
         })
+        this.exitEditMode();
     }
 
     addLoop = () => {
@@ -50,10 +51,9 @@ export class List extends Component {
 
     addItem = (item) => {
         movieServices.postMovie(item).then(res => {
-            if (res.id) this.getData();
+            if (res) this.getData();
             alert(`${res.name} added! Movie id: ${res.id}`);
-            this.setState({ movieToPreview: {}, formIsActive: false, isEditMode: false });
-
+           this.exitEditMode();
         })
         console.log('inside addItem:', this.state);
     }
@@ -70,7 +70,7 @@ export class List extends Component {
         let movie = { ...movieToUpdate }
         delete movie.id;
         movieServices.updateMovie(parseInt(id), movie).then(res => {
-            if (res.id) this.getData();
+            if (res) this.getData();
             alert(`${res.name} updated! Movie id: ${res.id}`)
             this.exitEditMode();
         })
@@ -83,7 +83,7 @@ export class List extends Component {
 
 
     render() {
-        console.log('on render:', this.state)
+        //console.log('on render:', this.state)
         return (
             <div className='container'>
                 <div className='list'>{this.state.movies.map((movie, key) => (

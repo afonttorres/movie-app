@@ -17,9 +17,12 @@ export class Preview extends Component {
         Object.keys(preview).forEach(key => preview[key] = this.state.previewData[key]);
 
         this.state.preview = preview;
+
+        console.log('update state:',this.state.preview)
     }
 
     render() {
+        console.log('render state:', this.state.preview)
         return (
             <article className='preview'>
                 <div className="img-container">

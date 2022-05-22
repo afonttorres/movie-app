@@ -23,7 +23,6 @@ export class Form extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         let submitter = e.nativeEvent.submitter.value;
-        this.emptyInput(e);
 
         if (submitter === 'add' && this.props.isEditMode === false) {
             this.addItem(this.state.movie);
@@ -35,7 +34,7 @@ export class Form extends Component {
         }
     }
 
-    emptyInput = (e) => {
+    emptyInput = () => {
         this.setState({ movie: { id: '', name: '', genre: '', year: '', valoration: '', imgUrl: '' } })
     }
 
@@ -51,16 +50,23 @@ export class Form extends Component {
         let newItem = state;
         this.sanitize(newItem);
         this.props.addItem(newItem);
+        this.emptyInput();
     }
 
     updateItem = (state) => {
-        this.setState(null);
         let movie = state;
+        let changesCount = 0;
         this.sanitize(movie);
         for (let key in movie) {
-            if (movie[key] !== this.props.movieToPreview[key]) this.props.updateItem(movie, this.props.movieToPreview.id)
-            else alert('Changes not found'); return;
+            if (movie[key] !== this.props.movieToPreview[key]) changesCount++;
         }
+        if (changesCount > 0) this.props.updateItem(movie, this.props.movieToPreview.id);
+        else {
+            let confirmation = window.confirm('Did not found any changes, do you want to save your movie without changes?');
+            if(!confirmation) return;
+            else this.props.updateItem(movie, this.props.movieToPreview.id);
+        }
+        this.emptyInput();
     }
 
     render() {
