@@ -8,21 +8,24 @@ export class Card extends Component {
     constructor(props) {
         super(props)
     }
-    delete = (id)=> {
+    delete = (id) => {
         this.props.deleteItem(id);
     }
-    edit = (movie) =>{
+    edit = (movie) => {
         this.props.toggleForm();
         this.props.nextMovieToPreview(movie);
+    }
+    fav = (movie) => {
+        this.props.fav(movie)
     }
     render() {
         return (
             <div className="card" id={this.props.movie.id}>
                 <div className="img-container line">
                     <img className='img' src={this.props.movie.imgUrl} alt="" />
-                    <button className='deleteButton' onClick={()=> this.delete(this.props.movie.id)}><i className="fa-solid fa-trash-can"></i></button>
-                    <button className='editButton' onClick={()=> this.edit(this.props.movie)}><i className="fa-solid fa-pen-to-square"></i></button>
-                    <Link to='/card-info'><button className='infoButton' ><i className="fa-solid fa-info"></i></button></Link>
+                    <button className='deleteButton' onClick={() => this.delete(this.props.movie.id)}><i className="fa-solid fa-trash-can"></i></button>
+                    <button className='editButton' onClick={() => this.edit(this.props.movie)}><i className="fa-solid fa-pen-to-square"></i></button>
+                    <Link to={`/card-info/${this.props.movie.id}`}><button className='infoButton' ><i className="fa-solid fa-info"></i></button></Link>
                 </div>
                 <div className="info-row font line">
                     <div className="info-text-container line">
@@ -32,8 +35,8 @@ export class Card extends Component {
                     </div>
                     <div className="info-ix-container line">
                         <p className="valoration">{this.props.movie.valoration}</p>
-                        <div className="fav-icon-container">
-                            <i className="fa-solid fa-star fav-icon-border"><i className="fa-solid fa-star fav-icon-background"></i></i>
+                        <div className="fav-icon-container" onClick={() => this.fav(this.props.movie)}>
+                            <i className="fa-solid fa-star fav-icon-border"><i className={`fa-solid fa-star fav-icon-background ${!this.props.movie.isFav ? 'fav-icon-background-unfav' : 'fav-icon-background-fav'}`}></i></i>
                         </div>
                     </div>
                 </div>

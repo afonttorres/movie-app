@@ -12,7 +12,8 @@ export class List extends Component {
             movies: [],
             formIsActive: false,
             movieToPreview: {},
-            isEditMode: false
+            isEditMode: false,
+            movieDetail: {},
         }
     }
 
@@ -34,7 +35,7 @@ export class List extends Component {
             alert(`Movie: ${res.name} erased`);
         })
         this.exitEditMode();
-        this.setState({formIsActive: false});
+        this.setState({ formIsActive: false });
     }
 
     addLoop = () => {
@@ -54,8 +55,8 @@ export class List extends Component {
         movieServices.postMovie(item).then(res => {
             if (res) this.getData();
             alert(`${res.name} added! Movie id: ${res.id}`);
-           this.exitEditMode();
-           this.setState({formIsActive: false});
+            this.exitEditMode();
+            this.setState({ formIsActive: false });
         })
         console.log('inside addItem:', this.state);
     }
@@ -68,16 +69,32 @@ export class List extends Component {
         this.setState({ isEditMode: false, movieToPreview: {} })
     }
 
-    updateItem = (movieToUpdate, id) => {
-        let movie = { ...movieToUpdate }
-        delete movie.id;
-        movieServices.updateMovie(parseInt(id), movie).then(res => {
+    updateItem = (movie) => {
+        let data = movie;
+        let id = movie.id;
+        delete data.id;
+        movieServices.updateMovie(parseInt(id), data).then(res => {
             if (res) this.getData();
             alert(`${res.name} updated! Movie id: ${res.id}`)
             this.exitEditMode();
-            this.setState({formIsActive: false});
+            this.setState({ formIsActive: false });
         })
         console.log('inside updateItem:', this.state)
+    }
+
+    fav = (movie) => {
+        let data = movie;
+        let id = movie.id;
+        delete data.id;
+
+        if (data.isFav) data.isFav = !data.isFav;
+        else data = { ...data, isFav: true }
+
+        movieServices.updateMovie(parseInt(id), data).then(res => {
+            if (res) this.getData();
+            this.exitEditMode();
+            console.log(res.isFav)
+        })
     }
 
     toggleForm = () => {
@@ -90,8 +107,8 @@ export class List extends Component {
         return (
             <div className='container'>
                 <div className='list'>{this.state.movies.map((movie, key) => (
-                    <Card key={key} movie={movie} deleteItem={this.deleteItem} toggleForm={this.toggleForm} nextMovieToPreview={this.nextMovieToPreview} />
-                ))}
+                    <Card key={key} movie={movie} deleteItem={this.deleteItem} toggleForm={this.toggleForm} nextMovieToPreview={this.nextMovieToPreview} getMovie={this.getMovie} fav={this.fav} />
+                )).reverse()}
                 </div>
                 {!this.state.formIsActive ?
                     <button className='form-button' onClick={() => { this.toggleForm(); this.exitEditMode() }}>Add</button>
@@ -102,6 +119,10 @@ export class List extends Component {
                     : null}
 
             </div>
+
         )
+
+
     }
 }
+

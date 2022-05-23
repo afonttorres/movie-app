@@ -23,16 +23,16 @@ export class Preview extends Component {
         return (
             <article className='preview'>
                 <div className="img-container">
-                    <img className="img" src={this.state.preview.imgUrl} alt="" />
+                    <img className="img" src={this.props.previewData.imgUrl} alt="" />
                 </div>
                 <div className="info-row font preview-font-size">
                     <div className="info-text-container">
-                        <p className="name preview-font-size">{this.state.preview.name}</p>
-                        <p className="year preview-font-size">{this.state.preview.year}</p>
-                        <p className="genre preview-font-size">{this.state.preview.genre}</p>
+                        <p className="name preview-font-size">{this.props.previewData.name}</p>
+                        <p className="year preview-font-size">{this.props.previewData.year}</p>
+                        <p className="genre preview-font-size">{this.props.previewData.genre}</p>
                     </div>
                     <div className="info-ix-container">
-                        <p className="valoration preview-font-size">{this.state.preview.valoration}</p>
+                        <p className="valoration preview-font-size">{this.props.previewData.valoration}</p>
                         <div className="fav-icon-container">
                             <i className="fa-solid fa-star fav-icon-border"><i className="fa-solid fa-star fav-icon-background"></i></i>
                         </div>

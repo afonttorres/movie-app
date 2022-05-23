@@ -83,11 +83,16 @@
 }
 
 .fav-icon-background {
-    font-size: .85rem;
+    font-size: .75rem;
     position: absolute;
     top: 5%;
     left: 0%;
+}
+.fav-icon-background-unfav{
     color: var(--wrapper-color);
+}
+.fav-icon-background-fav{
+    color: var(--select-green);
 }
 .deleteButton, .editButton, .infoButton{
     width: 20%;

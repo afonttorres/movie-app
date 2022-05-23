@@ -64,7 +64,7 @@ export class Form extends Component {
         else {
             let confirmation = window.confirm('Did not found any changes, do you want to save your movie without changes?');
             if(!confirmation) return;
-            else this.props.updateItem(movie, this.props.movieToPreview.id);
+            else this.props.updateItem(movie);
         }
         this.emptyInput();
     }

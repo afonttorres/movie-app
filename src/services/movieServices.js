@@ -33,5 +33,12 @@ export const movieServices = {
         })
 
         return updatMovie;
+    },
+
+    getMovie(id){
+        const getMovie = axios.get(`${baseURL}/movies/${id}`).then(res =>{
+            return res.data;
+        })
+        return getMovie;
     }
 }
