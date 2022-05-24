@@ -107,7 +107,7 @@ export class List extends Component {
         return (
             <div className='container'>
                 <div className='list'>{this.state.movies.map((movie, key) => (
-                    <Card key={key} movie={movie} deleteItem={this.deleteItem} toggleForm={this.toggleForm} nextMovieToPreview={this.nextMovieToPreview} getMovie={this.getMovie} fav={this.fav} />
+                    <Card key={key} movie={movie} deleteItem={this.deleteItem} toggleForm={this.toggleForm} nextMovieToPreview={this.nextMovieToPreview} fav={this.fav} />
                 )).reverse()}
                 </div>
                 {!this.state.formIsActive ?
@@ -121,8 +121,6 @@ export class List extends Component {
             </div>
 
         )
-
-
     }
 }
 
