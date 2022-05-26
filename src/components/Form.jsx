@@ -1,53 +1,51 @@
 import '../components/form.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Preview } from './Preview';
 
 export const Form = (props) => {
 
-    const [state, setState] = useState({ isEditMode: props.isEditMode, movie: props.movieToPreview, })
+    const [isEditMode, setisEditMode] = useState(props.isEditMode);
+    const [movieToPreview, setMovieToPreview] = useState(props.movieToPreview);
+    const [movie, setMovie] = useState(props.movieToPreview);
 
     const handleInputChange = (e) => {
-
         let name = e.target.name;
         let value = e.target.value.toLowerCase();
 
-        setState({ isEditMode: props.isEditMode, movie: { ...state.movie, [name]: value } })
-
-        console.log(state)
+        setMovie({
+            ...movie, [name]: value,
+        })
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
         let submitter = e.nativeEvent.submitter.value;
 
-        if (submitter === 'add' && state.isEditMode === false) {
-            addItem(state.movie);
+        if (submitter === 'add' && isEditMode === false) {
+            addItem(movie);
             return;
         }
         else {
-            updateItem(state.movie);
+            updateItem(movie);
             return;
         }
     }
 
     const emptyInput = () => {
-        setState({ isEditMode: props.isEditMode, movie: { id: '', name: '', genre: '', year: '', valoration: '', imgUrl: '' } })
+        setMovie({ name: '', genre: '', year: '', valoration: '', imgUrl: '' })
     }
 
     const sanitize = (obj) => {
-        let data = obj;
-        let id = data.id;
-        delete data.id;
         let isAble = false;
-        for (let key in data) {
-            if (data[key].length > 0 && typeof data[key] === 'string') isAble = true;
+        for (let key in obj) {
+            if (obj[key].length > 0 || obj[key].length === undefined) isAble = true;
             else isAble = false
         }
         return isAble;
     }
 
-    const addItem = (state) => {
-        let newItem = state;
+    const addItem = (data) => {
+        let newItem = data;
         if (sanitize(newItem)) { props.addItem(newItem); emptyInput(); }
         else {
             let confirmation = window.confirm('Your inputs are empty, are you sure to save this data?');
@@ -56,18 +54,19 @@ export const Form = (props) => {
         }
     }
 
-    const updateItem = (state) => {
-        let movie = state;
+    const updateItem = (data) => {
+        let movie = data;
         let changesCount = 0;
+
         if (sanitize(movie)) {
             for (let key in movie) {
-                if (movie[key] !== props.movieToPreview[key]) changesCount++;
+                if (movie[key] !== movieToPreview[key]) changesCount++;
             }
-            if (changesCount > 0) props.updateItem(movie, props.movieToPreview.id);
+            if (changesCount > 0) props.updateItem(movie, movie.id);
             else {
                 let confirmation = window.confirm('Did not found any changes, do you want to save your movie without changes?');
                 if (!confirmation) return;
-                else props.updateItem(movie);
+                else props.updateItem(movie, movie.id);
             }
             emptyInput();
         }
@@ -77,29 +76,29 @@ export const Form = (props) => {
         }
     }
 
-    let val = state.isEditMode === false ? 'add' : 'edit';
+    let val = isEditMode === false ? 'add' : 'edit';
+    
     return (
-
         <form className='form' onSubmit={handleSubmit}>
-            {state.isEditMode === false ?
+            {isEditMode === false ?
                 <p className='closeButton' onClick={() => props.toggleForm()}><i className="fa-solid fa-x"></i></p>
                 : null}
 
-            <div className={`input-container ${state.movie && state.isEditMode === true ? 'preview-active' : ''}`}>
-                <input name="name" type="text" onChange={handleInputChange} value={state.movie.name} placeholder='name'></input>
-                <input name="genre" type="text" onChange={handleInputChange} value={state.movie.genre} placeholder='genre'></input>
-                <input name="year" type="text" onChange={handleInputChange} value={state.movie.year} placeholder='year'></input>
-                <input name="imgUrl" type="text" onChange={handleInputChange} value={state.movie.imgUrl} placeholder='img url'></input>
-                <input name="valoration" type="text" onChange={handleInputChange} value={state.movie.valoration} placeholder='valoration'></input>
+            <div className={`input-container ${movie && isEditMode === true ? 'preview-active' : ''}`}>
+                <input name="name" type="text" onChange={handleInputChange} value={movie.name} placeholder='name'></input>
+                <input name="genre" type="text" onChange={handleInputChange} value={movie.genre} placeholder='genre'></input>
+                <input name="year" type="text" onChange={handleInputChange} value={movie.year} placeholder='year'></input>
+                <input name="imgUrl" type="text" onChange={handleInputChange} value={movie.imgUrl} placeholder='img url'></input>
+                <input name="valoration" type="text" onChange={handleInputChange} value={movie.valoration} placeholder='valoration'></input>
             </div>
 
-            <div className={`button-container ${state.movieToPreview && state.isEditMode ? 'preview-active' : ''}`}>
+            <div className={`button-container ${movieToPreview && isEditMode ? 'preview-active' : ''}`}>
                 <button type="submit" className="add-button" value={val}>{val.toLocaleUpperCase()}</button>
             </div>
 
-            {state.movie && state.isEditMode ?
+            {movieToPreview && isEditMode ?
                 <div className='preview-container'>
-                    <Preview movieToPreview={state.movie} previewData={state.movie} />
+                    <Preview movieToPreview={movieToPreview} previewData={movie} />
                 </div>
                 : null}
 

@@ -69,8 +69,9 @@ export class List extends Component {
         this.setState({ isEditMode: false, movieToPreview: {} })
     }
 
-    updateItem = (movie) => {
-        movieServices.updateMovie(parseInt(this.state.movieToPreview.id), movie).then(res => {
+    updateItem = (movie, id) => {
+        console.log(id)
+        movieServices.updateMovie(movie, parseInt(id)).then(res => {
             if (res) this.getData();
             alert(`${res.name} updated! Movie id: ${res.id}`)
             this.exitEditMode();
@@ -88,7 +89,7 @@ export class List extends Component {
         if (data.isFav) data.isFav = !data.isFav;
         else data = { ...data, isFav: true }
 
-        movieServices.updateMovie(parseInt(id), data).then(res => {
+        movieServices.updateMovie(data, parseInt(id)).then(res => {
             if (res) this.getData();
             this.exitEditMode();
             console.log(res.isFav)
@@ -101,7 +102,6 @@ export class List extends Component {
 
 
     render() {
-        // console.log('on render:', this.state)
         return (
             <div className='container'>
                 <div className='list'>{this.state.movies.map((movie, key) => (
@@ -113,7 +113,7 @@ export class List extends Component {
                     : null}
 
                 {this.state.formIsActive ?
-                    <Form addItem={this.addItem} toggleForm={this.toggleForm} formIsActive={this.state.formIsActive} movieToPreview={this.state.movieToPreview} updateItem={this.updateItem} isEditMode={this.state.isEditMode} />
+                    <Form addItem={this.addItem} toggleForm={this.toggleForm} movieToPreview={this.state.movieToPreview} updateItem={this.updateItem} isEditMode={this.state.isEditMode} />
                     : null}
 
             </div>

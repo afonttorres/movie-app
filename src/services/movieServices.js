@@ -27,7 +27,7 @@ export const movieServices = {
         return postMovie;
     },
 
-    updateMovie(id, movie) {
+    updateMovie(movie, id) {
         const updatMovie = axios.put(`${baseURL}/movies/${id}`, movie).then(res => {
             return res.data
         })
