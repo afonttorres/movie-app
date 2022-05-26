@@ -70,10 +70,7 @@ export class List extends Component {
     }
 
     updateItem = (movie) => {
-        let data = movie;
-        let id = movie.id;
-        delete data.id;
-        movieServices.updateMovie(parseInt(id), data).then(res => {
+        movieServices.updateMovie(parseInt(this.state.movieToPreview.id), movie).then(res => {
             if (res) this.getData();
             alert(`${res.name} updated! Movie id: ${res.id}`)
             this.exitEditMode();
@@ -83,6 +80,7 @@ export class List extends Component {
     }
 
     fav = (movie) => {
+        console.log(movie)
         let data = movie;
         let id = movie.id;
         delete data.id;
