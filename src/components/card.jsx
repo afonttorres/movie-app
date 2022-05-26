@@ -7,12 +7,12 @@ export const Card = (props) =>{
     const deleteMovie = (id) => {
         props.deleteItem(id);
     }
-    const editMovie = (movie) => {
+    const editMovie = (movieToEdit) => {
         props.toggleForm();
-        props.nextMovieToPreview(movie);
+        props.nextMovieToPreview(movieToEdit);
     }
-    const favMovie = (movie) => {
-        props.fav(movie)
+    const favMovie = (movieToFav) => {
+        props.fav(movieToFav)
     }
 
     return(
