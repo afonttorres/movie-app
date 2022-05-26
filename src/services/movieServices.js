@@ -40,5 +40,11 @@ export const movieServices = {
             return res.data;
         })
         return getMovie;
+    },
+    getFavMovies(){
+        const fav = axios.get(`${baseURL}/movies`).then(res =>{
+            return res.data.filter(movie => movie.isFav === true)
+        })
+        return fav;
     }
 }

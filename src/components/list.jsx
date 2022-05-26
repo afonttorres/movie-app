@@ -2,6 +2,7 @@ import '../components/list.css'
 import { Form } from './Form';
 import { movieServices } from '../services/movieServices';
 import { Card } from './Card';
+import { FavMovies } from './FavMovies';
 const { Component } = require("react");
 
 export class List extends Component {
@@ -104,6 +105,7 @@ export class List extends Component {
     render() {
         return (
             <div className='container'>
+                <FavMovies />
                 <div className='list'>{this.state.movies.map((movie, key) => (
                     <Card key={key} movie={movie} deleteItem={this.deleteItem} toggleForm={this.toggleForm} nextMovieToPreview={this.nextMovieToPreview} fav={this.fav} />
                 )).reverse()}
