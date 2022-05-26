@@ -1,7 +1,7 @@
 import '../components/list.css'
-import { Card } from './Card';
 import { Form } from './Form';
 import { movieServices } from '../services/movieServices';
+import { Card } from './Card';
 const { Component } = require("react");
 
 export class List extends Component {
