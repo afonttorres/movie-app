@@ -82,19 +82,16 @@ export class List extends Component {
     }
 
     fav = (movie) => {
-        console.log(movie)
-        let data = movie;
-        let id = movie.id;
-        delete data.id;
 
-        if (data.isFav) data.isFav = !data.isFav;
-        else data = { ...data, isFav: true }
+        if (movie.isFav) movie.isFav = !movie.isFav;
+        else movie = { ...movie, isFav: true }
 
-        movieServices.updateMovie(data, parseInt(id)).then(res => {
+        movieServices.updateMovie(movie, movie.id).then(res => {
             if (res) this.getData();
             this.exitEditMode();
             console.log(res.isFav)
         })
+
     }
 
     toggleForm = () => {

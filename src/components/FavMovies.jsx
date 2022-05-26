@@ -26,7 +26,7 @@ export const FavMovies = () => {
             else setDisplayedMovie(favMovies[lastMovieIndex + 1])
         }
     }
-
+    console.log(favMovies)
     return (
         <div className="fav-slider">
             <p id='backButton' className="slide-button" onClick={slideImg}>-</p>
