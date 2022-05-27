@@ -3,43 +3,38 @@ import { Form } from './Form';
 import { movieServices } from '../services/movieServices';
 import { Card } from './Card';
 import { FavMovies } from './FavMovies';
-const { Component } = require("react");
+const { useEffect, useState } = require("react");
 
-export class List extends Component {
-    constructor() {
-        super();
+export const List = (props) => {
 
-        this.state = {
-            movies: [],
-            formIsActive: false,
-            movieToPreview: {},
-            isEditMode: false,
-            movieDetail: {},
-        }
-    }
+    const [movies, setMovies] = useState([]);
+    const [formIsActive, setFormIsActive] = useState(false);
+    const [movieToPreview, setMovieToPreview] = useState({});
+    const [isEditMode, setIsEditMode] = useState(false);
 
-    getData() {
+
+    useEffect(() => {
+        getData();
+    }, [])
+
+    const getData = () => {
         movieServices.getAllMovies().then(res => {
-            this.setState({ movies: res })
+            setMovies(res)
         })
     }
 
-    componentDidMount() {
-        this.getData();
-    }
-
-    deleteItem = (id) => {
+    const deleteItem = (id) => {
         let confirmation = window.confirm('Are you sure?');
         if (!confirmation) return;
         movieServices.deleteMovie(parseInt(id)).then(res => {
-            if (res) this.getData();
+            if (res) getData();
             alert(`Movie: ${res.name} erased`);
         })
-        this.exitEditMode();
-        this.setState({ formIsActive: false });
+        exitEditMode();
+        setFormIsActive(false);
     }
 
-    addLoop = () => {
+    const addLoop = () => {
         let movie = {
             name: "shrek",
             genre: "animación, aventura, comedia",
@@ -48,76 +43,70 @@ export class List extends Component {
             imgUrl: "https://enfilme.com/img/content/schrek_poster_Enfilme_v3024_675_489.jpeg"
         }
         for (let i = 0; i < 5; i++) {
-            this.addItem(movie)
+            addItem(movie)
         }
     }
 
-    addItem = (item) => {
+    const addItem = (item) => {
         movieServices.postMovie(item).then(res => {
-            if (res) this.getData();
+            if (res) getData();
             alert(`${res.name} added! Movie id: ${res.id}`);
-            this.exitEditMode();
-            this.setState({ formIsActive: false });
+            exitEditMode();
+            setFormIsActive(false);
         })
-        console.log('inside addItem:', this.state);
     }
 
-    nextMovieToPreview = (movie) => {
-        this.setState({ movieToPreview: movie, isEditMode: true });
+    const nextMovieToPreview = (movie) => {
+        setMovieToPreview(movie);
+        setIsEditMode(true);
     }
 
-    exitEditMode = () => {
-        this.setState({ isEditMode: false, movieToPreview: {} })
+    const exitEditMode = () => {
+        setMovieToPreview({});
+        setIsEditMode(false);
     }
 
-    updateItem = (movie, id) => {
+    const updateItem = (movie, id) => {
         console.log(id)
         movieServices.updateMovie(movie, parseInt(id)).then(res => {
-            if (res) this.getData();
+            if (res) getData();
             alert(`${res.name} updated! Movie id: ${res.id}`)
-            this.exitEditMode();
-            this.setState({ formIsActive: false });
+            exitEditMode();
+            setFormIsActive(false);
         })
-        console.log('inside updateItem:', this.state)
     }
 
-    fav = (movie) => {
+    const fav = (movie) => {
 
         if (movie.isFav) movie.isFav = !movie.isFav;
         else movie = { ...movie, isFav: true }
 
         movieServices.updateMovie(movie, movie.id).then(res => {
-            if (res) this.getData();
-            this.exitEditMode();
-            console.log(res.isFav)
+            if (res) getData();
+            exitEditMode();
         })
 
     }
 
-    toggleForm = () => {
-        this.setState({ formIsActive: !this.state.formIsActive });
+    const toggleForm = () => {
+        setFormIsActive(!formIsActive);
     }
 
-
-    render() {
-        return (
-            <div className='container'>
-                <FavMovies />
-                <div className='list'>{this.state.movies.map((movie, key) => (
-                    <Card key={key} movie={movie} deleteItem={this.deleteItem} toggleForm={this.toggleForm} nextMovieToPreview={this.nextMovieToPreview} fav={this.fav} />
-                )).reverse()}
-                </div>
-                {!this.state.formIsActive ?
-                    <button className='form-button' onClick={() => { this.toggleForm(); this.exitEditMode() }}>Add</button>
-                    : null}
-
-                {this.state.formIsActive ?
-                    <Form addItem={this.addItem} toggleForm={this.toggleForm} movieToPreview={this.state.movieToPreview} updateItem={this.updateItem} isEditMode={this.state.isEditMode} />
-                    : null}
-
+    return (
+        <div className='container'>
+            <FavMovies />
+            <div className='list'>{movies.map((movie, key) => (
+                <Card key={key} movie={movie} deleteItem={deleteItem} toggleForm={toggleForm} nextMovieToPreview={nextMovieToPreview} fav={fav} />
+            )).reverse()}
             </div>
+            {!formIsActive ?
+                <button className='form-button' onClick={() => { toggleForm(); exitEditMode() }}>Add</button>
+                : null}
 
-        )
-    }
+            {formIsActive ?
+                < Form addItem={addItem} toggleForm={toggleForm} movieToPreview={movieToPreview} updateItem={updateItem} isEditMode={isEditMode} />
+                : null}
+
+        </div>
+    )
 }
-
