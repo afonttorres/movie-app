@@ -11,15 +11,24 @@ export const List = (props) => {
     const [formIsActive, setFormIsActive] = useState(false);
     const [movieToPreview, setMovieToPreview] = useState({});
     const [isEditMode, setIsEditMode] = useState(false);
+    const [favMovies, setFavMovies] = useState([])
 
 
     useEffect(() => {
         getData();
+        getFavMovies();
     }, [])
 
     const getData = () => {
         movieServices.getAllMovies().then(res => {
             setMovies(res)
+        })
+    }
+
+    const getFavMovies = () => {
+        movieServices.getFavMovies().then(res => {
+            console.log(res)
+            setFavMovies(res)
         })
     }
 
@@ -84,6 +93,7 @@ export const List = (props) => {
         movieServices.updateMovie(movie, movie.id).then(res => {
             if (res) getData();
             exitEditMode();
+            getFavMovies();
         })
 
     }
@@ -94,7 +104,7 @@ export const List = (props) => {
 
     return (
         <div className='container'>
-            <FavMovies />
+            {favMovies.length > 0 ? <FavMovies favMovies={favMovies} /> : 'null'}
             <div className='list'>{movies.map((movie, key) => (
                 <Card key={key} movie={movie} deleteItem={deleteItem} toggleForm={toggleForm} nextMovieToPreview={nextMovieToPreview} fav={fav} />
             )).reverse()}
