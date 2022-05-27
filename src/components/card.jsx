@@ -21,7 +21,7 @@ export const Card = (props) =>{
                     <img className='img' src={movie.imgUrl} alt="" />
                     <button className='deleteButton' onClick={() => deleteMovie(movie.id)}><i className="fa-solid fa-trash-can"></i></button>
                     <button className='editButton' onClick={() => editMovie(movie)}><i className="fa-solid fa-pen-to-square"></i></button>
-                    <Link to={`/card-info/${movie.id}`}><button className='infoButton' ><i className="fa-solid fa-info"></i></button></Link>
+                    <Link to={`/movie-info/${movie.id}`}><button className='infoButton' ><i className="fa-solid fa-info"></i></button></Link>
                 </div>
                 <div className="info-row font line">
                     <div className="info-text-container line">

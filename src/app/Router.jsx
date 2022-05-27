@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { App } from '../App';
 import { Home } from '../pages/Home';
 import { Login } from '../pages/Login';
-import { CardInfo } from '../components/CardInfo';
+import { MovieInfo } from '../components/MovieInfo';
 
 export default function Router() {
     return (
@@ -13,7 +13,7 @@ export default function Router() {
                 <Route path='/' element={<App />}></Route>
                 <Route path='/home' element={<Home />}></Route>
                 <Route path='/login' element={<Login />}></Route>
-                <Route path='/card-info/:id' element={<CardInfo />}></Route>
+                <Route path='/movie-info/:id' element={<MovieInfo />}></Route>
             </Routes>
         </BrowserRouter>
     )
