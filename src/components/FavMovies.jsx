@@ -12,7 +12,7 @@ export const FavMovies = (props) => {
 
     const loadData = () => {
         setFavMovies(props.favMovies)
-        setDisplayedMovie(props.favMovies[(props.favMovies.length-1)/2])
+        setDisplayedMovie(props.favMovies[0])
     }
     const slideImg = (e) => {
         let lastMovieIndex = favMovies.findIndex(movie => movie === displayedMovie);
@@ -25,11 +25,12 @@ export const FavMovies = (props) => {
         }
     }
 
+    console.log(displayedMovie.id)
     return (
-        <div className="fav-slider">
+        <div className={displayedMovie ? 'fav-slider' : 'fav-slider skeleton'} >
             <p id='backButton' className="slide-button" onClick={slideImg}>-</p>
-            <img src={displayedMovie.imgUrl} alt="" />
+            <img src={displayedMovie.imgUrl} alt="" className={displayedMovie ? '' : 'd-none'} />
             <p id="nextButton" className="slide-button" onClick={slideImg}>+</p>
-        </div>
+        </div >
     )
 }

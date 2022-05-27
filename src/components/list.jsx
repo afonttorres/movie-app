@@ -90,6 +90,7 @@ export const List = (props) => {
         else movie = { ...movie, isFav: true }
 
         movieServices.updateMovie(movie, movie.id).then(res => {
+            console.log(res.isFav)
             if (res) getData();
             exitEditMode();
             getFavMovies();
@@ -103,8 +104,8 @@ export const List = (props) => {
 
     return (
         <div className='container'>
-            {favMovies.length > 0 ? <FavMovies favMovies={favMovies} /> : 'null'}
-            <div className='list'>{movies.map((movie, key) => (
+            {favMovies.length > 0 ? <FavMovies favMovies={favMovies} /> : <div className='fav-slider skeleton'></div>}
+            <div className='list'> {movies.map((movie, key) => (
                 <Card key={key} movie={movie} deleteItem={deleteItem} toggleForm={toggleForm} nextMovieToPreview={nextMovieToPreview} fav={fav} />
             )).reverse()}
             </div>
