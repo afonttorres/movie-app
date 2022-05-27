@@ -27,7 +27,6 @@ export const List = (props) => {
 
     const getFavMovies = () => {
         movieServices.getFavMovies().then(res => {
-            console.log(res)
             setFavMovies(res)
         })
     }
