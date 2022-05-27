@@ -9,8 +9,6 @@ export const MovieInfo = () => {
     const [movieInfo, setMovieInfo] = useState();
     const [id, setId] = useState(parseInt(useParams().id))
 
-    console.log(id)
-
     useEffect(() => {
         movieServices.getMovie(id).then(res => {
             if (res) setMovieInfo(res)
