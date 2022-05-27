@@ -102,9 +102,20 @@ export const List = (props) => {
         setFormIsActive(!formIsActive);
     }
 
+    // const FavElement = () => {
+    //     const [element, setElement] = useState(<div className='fav-slider skeleton'></div>)
+    //     useEffect(() => {
+    //         setTimeout(() => {
+    //             setElement(<FavMovies favMovies={favMovies} />)
+    //         }, 55);
+    //     }, [element])
+    //     return (element)
+    // }
+
     return (
         <div className='container'>
             {favMovies.length > 0 ? <FavMovies favMovies={favMovies} /> : <div className='fav-slider skeleton'></div>}
+            {/* <FavMovies favMovies={favMovies} /> */}
             <div className='list'> {movies.map((movie, key) => (
                 <Card key={key} movie={movie} deleteItem={deleteItem} toggleForm={toggleForm} nextMovieToPreview={nextMovieToPreview} fav={fav} />
             )).reverse()}
