@@ -91,6 +91,7 @@
     position: relative;
     display: contents;
     color: var(--main-font-color);
+    z-index: 3;
 }
 .fav-icon-unfav{
     color: var(--main-font-color);

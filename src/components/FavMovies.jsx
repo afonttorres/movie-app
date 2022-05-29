@@ -19,7 +19,7 @@ export const FavMovies = (props) => {
         setCardWidth(document.querySelector('.slider-card').clientWidth);
         setInitialPos(cardWidth);
         //setIsPlaying(true);
-    }, [favMovies, cardWidth])
+    }, [props.favMovies, cardWidth])
 
     useEffect(() => {
         if (initialPos) {
@@ -27,12 +27,12 @@ export const FavMovies = (props) => {
             setIsPlaying(isPlaying);
         }
 
-    }, [initialPos, slider, isPlaying])
+    }, [initialPos, slider, isPlaying, props.favMovies])
 
 
     useEffect(() => {
-        let milisecs = 1500;
-        let maxScroll = (favMovies.length - 1) * cardWidth;
+        let milisecs = 2000;
+        let maxScroll = (props.favMovies.length - 1) * cardWidth;
 
         var timerID;
 
@@ -52,12 +52,14 @@ export const FavMovies = (props) => {
             clearInterval(timerID); setInitialPos(cardWidth);
         };
 
-    }, [isPlaying, favMovies, slider, cardWidth])
+    }, [isPlaying, props.favMovies, slider, cardWidth])
 
 
     const togglePlayer = () => {
         setIsPlaying(!isPlaying)
     }
+
+    console.log(favMovies)
 
     return (
         <div className={favMovies.length > 0 ? 'fav-slider' : 'fav-slider skeleton'} >
