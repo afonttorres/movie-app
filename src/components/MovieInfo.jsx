@@ -1,5 +1,6 @@
 import { Component, useEffect, useState } from "react";
-import { Nav } from './Nav'
+import { Nav } from './Nav';
+import { Footer } from './Footer';
 import '../components/movieinfo.css';
 import { Link, useParams } from "react-router-dom";
 import { movieServices } from "../services/movieServices";
@@ -27,9 +28,9 @@ export const MovieInfo = () => {
                         <h1 className='font info'>{movieInfo.valoration}</h1>
                     </article>
                     : null}
-
-                <Link to='/home' className="link"><i className="fa-solid fa-rotate-left backButton"></i></Link>
+                {/* <Link to='/home' className="link"><i className="fa-solid fa-rotate-left backButton"></i></Link> */}
             </div>
+            <Footer />
         </section>
     )
 }

@@ -9,20 +9,20 @@ export const Preview = (props) => {
     }, [props])
 
     return (
-        <article className='preview'>
-            <div className="img-container">
-                <img className="img" src={state.imgUrl} alt="" />
-            </div>
-            <div className="info-row font preview-font-size">
-                <div className="info-text-container">
-                    <p className="name preview-font-size">{state.name}</p>
-                    <p className="year preview-font-size">{state.year}</p>
-                    <p className="genre preview-font-size">{state.genre}</p>
+        <article className='preview' style={{ backgroundImage: `url(${state.imgUrl})` }}>
+            <div className="card-opacity">
+                <div className="card-button-container">
+                    {/* <img className="img" src={state.imgUrl} alt="" /> */}
                 </div>
-                <div className="info-ix-container">
-                    <p className="valoration preview-font-size">{state.valoration}</p>
-                    <div className="fav-icon-container">
-                        <i className="fa-solid fa-star fav-icon-border"><i className="fa-solid fa-star fav-icon-background"></i></i>
+                <div className="info-row card-font">
+                    <div className="info-text-container">
+                        <p>{state.name}</p>
+                        <p>{state.year}</p>
+                        <p>{state.genre}</p>
+                    </div>
+                    <div className="info-ix-container">
+                        <p className="valoration">{state.valoration}</p>
+                        <i className={`fa-solid fa-star fav-icon ${!state.isFav ? 'fav-icon-unfav' : 'fav-icon-fav'}`}></i>
                     </div>
                 </div>
             </div>

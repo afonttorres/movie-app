@@ -1,9 +1,10 @@
 .preview{
     display: flex;
     flex-direction: column;
+    background-size: cover;
+    background-position: center;
     border-radius: var(--border-radius);
     background-color: var(--wrapper-color);
-}
-.preview-font-size{
-    font-size: xx-small;
+    z-index: 1;
+    height: 75%;
 }

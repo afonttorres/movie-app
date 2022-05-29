@@ -5,7 +5,7 @@ export const FavMovies = (props) => {
     const [favMovies, setFavMovies] = useState(props.favMovies);
     const [isPlaying, setIsPlaying] = useState(true);
 
-    const [slider, setSlider] = useState(document.querySelector('.fav-slider'));
+    const [slider, setSlider] = useState();
     const [cardWidth, setCardWidth] = useState();
 
     const [initialPos, setInitialPos] = useState();
@@ -19,7 +19,7 @@ export const FavMovies = (props) => {
         setCardWidth(document.querySelector('.slider-card').clientWidth);
         setInitialPos(cardWidth);
         //setIsPlaying(true);
-    }, [props.favMovies, cardWidth])
+    }, [favMovies, cardWidth])
 
     useEffect(() => {
         if (initialPos) {
@@ -27,7 +27,7 @@ export const FavMovies = (props) => {
             setIsPlaying(isPlaying);
         }
 
-    }, [initialPos])
+    }, [initialPos, slider, isPlaying])
 
 
     useEffect(() => {
@@ -38,17 +38,18 @@ export const FavMovies = (props) => {
 
         console.log(isPlaying)
 
-        if (isPlaying) {
+        if (isPlaying && slider) {
             console.log('just chilling')
 
             timerID = setInterval(() => {
                 slider.scrollBy(cardWidth, 0);
-                if (slider.scrollLeft > maxScroll) slider.scrollTo(0, 0)
+                console.log(slider.scrollLeft, maxScroll)
+                if (slider.scrollLeft > maxScroll-100) slider.scrollTo(0, 0)
             }, milisecs)
 
         } else {
             console.log('im not cleaning the interval')
-            if (timerID) clearInterval(timerID); setInitialPos(cardWidth);
+            clearInterval(timerID); setInitialPos(cardWidth);
         };
 
     }, [isPlaying, favMovies, slider, cardWidth])
@@ -60,11 +61,11 @@ export const FavMovies = (props) => {
 
     return (
         <div className={favMovies.length > 0 ? 'fav-slider' : 'fav-slider skeleton'} >
-            <button onClick={togglePlayer} className="toggleButton">{isPlaying ? <i className="fa-solid fa-pause"></i> : <i className="fa-solid fa-play"></i>}</button>
+            {/* <button onClick={togglePlayer} className="toggleButton">{isPlaying ? <i className="fa-solid fa-pause"></i> : <i className="fa-solid fa-play"></i>}</button> */}
             <>{favMovies ? favMovies.map((movie, key) =>
                 <div key={key} id={movie.id} className='slider-card'>
                     <img className="slider-img" src={movie.imgUrl} alt="" />
-                    <p className="slider-text">{movie.name}</p>
+                    <p className="slider-text font">{movie.name}</p>
                 </div>)
                 : null}</>
         </div >

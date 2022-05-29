@@ -11,7 +11,7 @@ export const List = (props) => {
     const [formIsActive, setFormIsActive] = useState(false);
     const [movieToPreview, setMovieToPreview] = useState({});
     const [isEditMode, setIsEditMode] = useState(false);
-    const [favMovies, setFavMovies] = useState([])
+    const [favMovies, setFavMovies] = useState([]);
 
 
     useEffect(() => {
@@ -22,6 +22,7 @@ export const List = (props) => {
     const getData = () => {
         movieServices.getAllMovies().then(res => {
             setMovies(res)
+            if (res) setTimeout(() => { document.querySelector('.list').classList.remove('skeleton') }, 50)
         })
     }
 
@@ -36,10 +37,10 @@ export const List = (props) => {
         if (!confirmation) return;
         movieServices.deleteMovie(parseInt(id)).then(res => {
             if (res) getData();
+            exitEditMode();
+            setFormIsActive(false);
             alert(`Movie: ${res.name} erased`);
         })
-        exitEditMode();
-        setFormIsActive(false);
     }
 
     const addLoop = () => {
@@ -78,9 +79,9 @@ export const List = (props) => {
         console.log(id)
         movieServices.updateMovie(movie, parseInt(id)).then(res => {
             if (res) getData();
-            alert(`${res.name} updated! Movie id: ${res.id}`)
             exitEditMode();
             setFormIsActive(false);
+            alert(`${res.name} updated! Movie id: ${res.id}`)
         })
     }
 
@@ -116,12 +117,12 @@ export const List = (props) => {
         <div className='container'>
             {favMovies.length > 0 ? <FavMovies favMovies={favMovies} /> : <div className='fav-slider skeleton'></div>}
             {/* <FavMovies favMovies={favMovies} /> */}
-            <div className='list'> {movies.map((movie, key) => (
+            <>{!formIsActive ? <div className='list skeleton'> {movies.map((movie, key) => (
                 <Card key={key} movie={movie} deleteItem={deleteItem} toggleForm={toggleForm} nextMovieToPreview={nextMovieToPreview} fav={fav} />
             )).reverse()}
-            </div>
+            </div> : null}</>
             {!formIsActive ?
-                <button className='form-button' onClick={() => { toggleForm(); exitEditMode() }}>Add</button>
+                <button className='form-button' onClick={() => { toggleForm(); exitEditMode() }}>ADD</button>
                 : null}
 
             {formIsActive ?
