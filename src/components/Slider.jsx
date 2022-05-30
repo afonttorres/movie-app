@@ -29,8 +29,6 @@ export const Slider = (props) => {
         setIndex(i);
     }
 
-    console.log(index)
-
     return (
         <div className="slider">
             <span onClick={goBack} className='slider-button'><i className="fa-solid fa-angle-left"></i></span>

@@ -1,0 +1,70 @@
+@import url(../pages/spinner.css);
+
+.searcher-form {
+    height: 15%;
+    width: 20%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5%;
+    position: relative;
+}
+
+.searcher-input,
+.searcher-button {
+    height: 35%;
+}
+
+.searcher-input {
+    width: 80%;
+    border-radius: 0.25rem;
+    border: 1px solid var(--bg);
+    color: var(--bg);
+    outline: none;
+    padding-left: 2.5%;
+    font-family: var(--main-font);
+}
+
+.searcher-button {
+    width: 15%;
+    color: var(--opacity);
+    font-size: x-large;
+    text-align: center;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.searcher-button:focus,
+.searcher-button:hover {
+    color: var(--main-font-color);
+    outline: none;
+}
+
+.suggestions-container {
+    height: 75%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    overflow-y: scroll;
+}
+
+.suggestion {
+    color: white;
+    height: 15%;
+    width: 25%;
+    margin: 2.5%;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+}
+
+@media only screen and (max-width: 820px) {
+
+    .searcher-form,
+    .suggestions-container {
+        width: 80%;
+    }
+}

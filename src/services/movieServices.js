@@ -35,16 +35,26 @@ export const movieServices = {
         return updatMovie;
     },
 
-    getMovie(id){
-        const getMovie = axios.get(`${baseURL}/movies/${id}`).then(res =>{
+    getMovie(id) {
+        const getMovie = axios.get(`${baseURL}/movies/${id}`).then(res => {
             return res.data;
         })
         return getMovie;
     },
-    getFavMovies(){
-        const fav = axios.get(`${baseURL}/movies`).then(res =>{
+    getFavMovies() {
+        const fav = axios.get(`${baseURL}/movies`).then(res => {
             return res.data.filter(movie => movie.isFav === true)
         })
         return fav;
+    },
+
+    getSearch(data) {
+        const search = axios.get(`${baseURL}/movies`).then(res => {
+            return res.data.filter(movie => {
+                let cut = data.length;
+                return movie.name.slice(0, cut) === data;
+            })
+        })
+        return search;
     }
 }

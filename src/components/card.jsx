@@ -24,7 +24,6 @@ export const Card = (props) => {
         <div className={movie ? 'card' : 'card skeleton'} style={movie ? { backgroundImage: `url(${movie.imgUrl})` } : null} id={movie ? `${movie.id}` : null}>
             <div className="card-opacity">
                 <div className={movie ? 'card-button-container line' : 'button-container skeleton'}>
-                    {/* <img className={movie ? 'img' : 'd-none'} src={movie.imgUrl} alt="" /> */}
                     <button className='deleteButton' onClick={() => deleteMovie(movie.id)}><i className={movie ? "fa-solid fa-trash-can" : 'd-none'}></i></button>
                     <button className='editButton' onClick={() => editMovie(movie)}><i className={movie ? "fa-solid fa-pen-to-square" : 'd-none'}></i></button>
                     <Link style={{ display: 'contents' }} to={`/movie-info/${movie.id}`}><button className='infoButton' ><i className={movie ? "fa-solid fa-info" : 'd-none'}></i></button></Link>
