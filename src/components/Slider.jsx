@@ -11,7 +11,7 @@ export const Slider = (props) => {
 
     useEffect(() => {
         let milisecs = 3000;
-        let timerID = setInterval(() => { console.log('in:', index); goNext() }, milisecs);
+        let timerID = setInterval(goNext, milisecs);
         return () => clearInterval(timerID);
     }, [index])
 
@@ -25,6 +25,12 @@ export const Slider = (props) => {
         else setIndex(index + 1);
     }
 
+    const changeIndex = (i) => {
+        setIndex(i);
+    }
+
+    console.log(index)
+
     return (
         <div className="slider">
             <span onClick={goBack} className='slider-button'><i className="fa-solid fa-angle-left"></i></span>
@@ -36,7 +42,7 @@ export const Slider = (props) => {
                             <p className='slider-text font'>{movie.name}</p>
                         </div> : null}</>
                 ) : null}
-                <ul className='dot-container'>{favMovies ? favMovies.map((movie, key) => <li className='dot'><i className={key === index ? "fa-solid fa-circle selected-dot" : 'fa-solid fa-circle'}></i></li>) : null}</ul>
+                <ul className='dot-container'>{favMovies ? favMovies.map((movie, key) => <li onClick={() => changeIndex(key)} className='dot'><i className={key === index ? "fa-solid fa-circle selected-dot" : 'fa-solid fa-circle'}></i></li>) : null}</ul>
             </div>
             <span onClick={goNext} className='slider-button'><i className="fa-solid fa-angle-right"></i></span>
         </div>

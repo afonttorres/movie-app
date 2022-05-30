@@ -67,6 +67,11 @@
     height: fit-content;
     width: fit-content;
     font-size: .75rem;
+    cursor: pointer;
+}
+
+.dot:hover, .dot:focus{
+    color: var(--bg);
 }
 
 .selected-dot {
