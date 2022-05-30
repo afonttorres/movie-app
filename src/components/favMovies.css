@@ -18,7 +18,7 @@
     margin: 0 2.5%;
 }
 
-.slider-img {
+.fav-slider-img {
     object-fit: cover;
     position: relative;
 }
@@ -27,7 +27,7 @@
     border-radius: .75rem;
 }
 
-.slider-text {
+.fav-slider-text {
     height: 10%;
     width: -moz-fit-content;
     width: fit-content;

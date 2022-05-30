@@ -3,6 +3,8 @@ import { Form } from './Form';
 import { movieServices } from '../services/movieServices';
 import { Card } from './Card';
 import { FavMovies } from './FavMovies';
+import { Slider } from './Slider';
+
 const { useEffect, useState } = require("react");
 
 export const List = (props) => {
@@ -115,8 +117,8 @@ export const List = (props) => {
 
     return (
         <div className='container'>
-            {favMovies.length > 0 ? <FavMovies favMovies={favMovies} /> : <div className='fav-slider skeleton'></div>}
-            {/* <FavMovies favMovies={favMovies} /> */}
+            {favMovies.length > 0 ? <Slider favMovies={favMovies} /> : <div className='fav-slider skeleton'></div>}
+            {/* {favMovies.length > 0 ? <FavMovies favMovies={favMovies} /> : <div className='fav-slider skeleton'></div>} */}
             <>{!formIsActive ? <div className='list skeleton'> {movies.map((movie, key) => (
                 <Card key={key} movie={movie} deleteItem={deleteItem} toggleForm={toggleForm} nextMovieToPreview={nextMovieToPreview} fav={fav} />
             )).reverse()}

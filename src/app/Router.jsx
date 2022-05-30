@@ -5,6 +5,7 @@ import { App } from '../App';
 import { Home } from '../pages/Home';
 import { Login } from '../pages/Login';
 import { MovieInfo } from '../components/MovieInfo';
+import { Searcher } from '../pages/Searcher';
 
 export default function Router() {
     return (
@@ -13,6 +14,7 @@ export default function Router() {
                 <Route path='/' element={<App />}></Route>
                 <Route path='/home' element={<Home />}></Route>
                 <Route path='/login' element={<Login />}></Route>
+                <Route path='/search' element={<Searcher />}></Route>
                 <Route path='/movie-info/:id' element={<MovieInfo />}></Route>
             </Routes>
         </BrowserRouter>

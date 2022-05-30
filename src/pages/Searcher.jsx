@@ -1,9 +1,9 @@
-import { Component, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { Nav } from "../components/Nav";
 import { Footer } from "../components/Footer";
+import '../pages/searcher.css'
+import { useEffect } from "react";
 
-export const Login = () =>{
+export const Searcher = () => {
     useEffect(()=>{
         swipeBack();
     })

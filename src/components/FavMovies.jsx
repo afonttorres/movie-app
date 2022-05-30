@@ -7,6 +7,7 @@ export const FavMovies = (props) => {
 
     const [slider, setSlider] = useState();
     const [cardWidth, setCardWidth] = useState();
+    const [gap, setGap] = useState();
 
     const [initialPos, setInitialPos] = useState();
 
@@ -17,7 +18,8 @@ export const FavMovies = (props) => {
     useEffect(() => {
         setSlider(document.querySelector('.fav-slider'));
         setCardWidth(document.querySelector('.slider-card').clientWidth);
-        setInitialPos(cardWidth);
+        setGap(document.querySelector('.fav-slider').clientWidth*.025);
+        setInitialPos(0);
         //setIsPlaying(true);
     }, [props.favMovies, cardWidth])
 
@@ -32,7 +34,7 @@ export const FavMovies = (props) => {
 
     useEffect(() => {
         let milisecs = 2000;
-        let maxScroll = (props.favMovies.length - 1) * cardWidth;
+        let maxScroll = (favMovies.length - 1) * cardWidth;
 
         var timerID;
 
@@ -40,34 +42,47 @@ export const FavMovies = (props) => {
 
         if (isPlaying && slider) {
             console.log('just chilling')
+            let count = 0;
 
             timerID = setInterval(() => {
-                slider.scrollBy(cardWidth, 0);
-                console.log(slider.scrollLeft, maxScroll)
-                if (slider.scrollLeft > maxScroll-100) slider.scrollTo(0, 0)
+                count++
+                if (count === 1) slider.scrollBy(cardWidth + gap, 0);
+                else slider.scrollBy(cardWidth + gap * 2, 0);
+                if (slider.scrollLeft > maxScroll - 100) slider.scrollTo(0, 0); count = 0;
             }, milisecs)
+
+            if (props.favMovies !== favMovies) {
+                clearInterval(timerID);
+                maxScroll = (props.favMovies.length - 1) * cardWidth;
+                slider.scrollTo(0, 0);
+                timerID = setInterval(() => {
+                    slider.scrollBy(cardWidth + gap * 2, 0);
+                    console.log(slider.scrollLeft, maxScroll)
+                    if (slider.scrollLeft > maxScroll - 100) slider.scrollTo(0, 0)
+                }, milisecs)
+            }
 
         } else {
             console.log('im not cleaning the interval')
             clearInterval(timerID); setInitialPos(cardWidth);
         };
 
-    }, [isPlaying, props.favMovies, slider, cardWidth])
+    }, [isPlaying, props.favMovies, slider, cardWidth, gap])
 
 
     const togglePlayer = () => {
         setIsPlaying(!isPlaying)
     }
 
-    console.log(favMovies)
+    // console.log(favMovies)
 
     return (
         <div className={favMovies.length > 0 ? 'fav-slider' : 'fav-slider skeleton'} >
             {/* <button onClick={togglePlayer} className="toggleButton">{isPlaying ? <i className="fa-solid fa-pause"></i> : <i className="fa-solid fa-play"></i>}</button> */}
             <>{favMovies ? favMovies.map((movie, key) =>
                 <div key={key} id={movie.id} className='slider-card'>
-                    <img className="slider-img" src={movie.imgUrl} alt="" />
-                    <p className="slider-text font">{movie.name}</p>
+                    <img className="fav-slider-img" src={movie.imgUrl} alt="" />
+                    <p className="fav-slider-text font">{movie.name}</p>
                 </div>)
                 : null}</>
         </div >

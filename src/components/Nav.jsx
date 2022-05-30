@@ -6,6 +6,7 @@ export const Nav = () => {
         <nav className="nav">
             <ul className="nav-item-container">
                 <li className="nav-item main-nav-item"><i className="fa-solid fa-skull"></i></li>
+                <li className='font nav-item mobile'> <Link to='/home'>HOME</Link></li>
                 <li className='font nav-item mobile'> <Link to='/login'>LOGIN</Link></li>
             </ul>
         </nav>
