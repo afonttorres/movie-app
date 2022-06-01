@@ -1,12 +1,18 @@
 import '../components/form.css';
 import { useEffect, useState } from 'react';
 import { Preview } from './Preview';
+import { Modal } from './Modal';
 
 export const Form = (props) => {
 
     const [isEditMode, setisEditMode] = useState(props.isEditMode);
     const [movieToPreview, setMovieToPreview] = useState(props.movieToPreview);
     const [movie, setMovie] = useState(props.movieToPreview);
+
+    //MODAL
+    const [isModalActive, setIsModalACtive] = useState(false);
+    const [msg, setMsg] = useState();
+    const [modalData, setModalData] = useState();
 
     const handleInputChange = (e) => {
         let name = e.target.name;
@@ -45,12 +51,10 @@ export const Form = (props) => {
     }
 
     const addItem = (data) => {
-        let newItem = data;
-        if (sanitize(newItem)) { props.addItem(newItem); emptyInput(); }
+        let movie = data;
+        if (sanitize(movie)) { props.addItem(movie); emptyInput(); }
         else {
-            let confirmation = window.confirm('Your inputs are empty, are you sure to save this data?');
-            if (!confirmation) return;
-            else props.addItem(newItem);
+            askConfirmation('Your inputs are empty, are you sure to save this data?', { movie: movie, id: movie.id, action: 'add' })
         }
     }
 
@@ -64,28 +68,39 @@ export const Form = (props) => {
             }
             if (changesCount > 0) props.updateItem(movie, movie.id);
             else {
-                let confirmation = window.confirm('Did not found any changes, do you want to save your movie without changes?');
-                if (!confirmation) return;
-                else props.updateItem(movie, movie.id);
+                askConfirmation('Did not found any changes, do you want to save your movie without changes?', { movie: movie, id: movie.id, action: 'update' })
             }
             emptyInput();
         }
         else {
-            window.confirm('Some of your inputs might be wrong, check them out again.');
+            openModal('Some of your inputs might be wrong, check them out again.');
             return;
         }
     }
 
-    const capitalize = (data) => {
-        let arr = [...data]
-        arr[0] = arr[0].toUpperCase();
-        return arr.join('');
+    const openModal = (data) => {
+        setIsModalACtive(true);
+        setMsg(data);
     }
 
+    const closeModal = () => {
+        setisEditMode(false);
+        setIsModalACtive(false);
+        setMsg();
+        props.closeModal();
+    }
+
+    const askConfirmation = (text, data) => {
+        openModal(text);
+        setModalData(data);
+    }
+
+
     let val = isEditMode === false ? 'add' : 'edit';
-    
+
     return (
         <form className='form' onSubmit={handleSubmit}>
+            {isModalActive ? <Modal msg={msg} closeModal={closeModal} modalData={modalData} confirm={props.confirm} /> : null}
             <p className='closeButton' onClick={() => props.toggleForm()}><i className="fa-solid fa-x"></i></p>
             <div className={`input-container ${movie && isEditMode === true ? 'preview-active' : ''}`}>
                 <input name="name" type="text" onChange={handleInputChange} value={movie.name} placeholder='name'></input>

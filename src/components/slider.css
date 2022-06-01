@@ -58,8 +58,8 @@
     width: -moz-fit-content;
     width: fit-content;
     position: absolute;
-    bottom: 5%;
-    left: 55%;
+    bottom: 90%;
+    left: 70%;
 }
 
 .dot {
@@ -76,4 +76,13 @@
 
 .selected-dot {
     color: var(--main-font-color);
+}
+@media only screen and (max-width: 820px) {
+
+    .dot{
+        font-size: .5rem;
+    }
+    .dot-container{
+        left: 70%;
+    }
 }

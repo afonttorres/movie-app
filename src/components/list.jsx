@@ -4,8 +4,11 @@ import { movieServices } from '../services/movieServices';
 import { Card } from './Card';
 import { FavMovies } from './FavMovies';
 import { Slider } from './Slider';
+import { Modal } from './Modal';
+import { Loader } from './Loader';
 
-const { useEffect, useState } = require("react");
+
+const { useEffect, useState, useCallback, useMemo } = require("react");
 
 export const List = (props) => {
 
@@ -14,6 +17,12 @@ export const List = (props) => {
     const [movieToPreview, setMovieToPreview] = useState({});
     const [isEditMode, setIsEditMode] = useState(false);
     const [favMovies, setFavMovies] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    //MODAL//
+    const [isModalActive, setIsModalACtive] = useState(false);
+    const [msg, setMsg] = useState();
+    const [modalData, setModalData] = useState();
+
 
 
     useEffect(() => {
@@ -24,7 +33,9 @@ export const List = (props) => {
     const getData = () => {
         movieServices.getAllMovies().then(res => {
             setMovies(res)
-            if (res) setTimeout(() => { document.querySelector('.list').classList.remove('skeleton') }, 50)
+            let s = .5;
+            let ms = s * 1000;
+            if (res) setTimeout(() => setIsLoading(false), ms)
         })
     }
 
@@ -34,14 +45,14 @@ export const List = (props) => {
         })
     }
 
+
     const deleteItem = (id) => {
-        let confirmation = window.confirm('Are you sure?');
-        if (!confirmation) return;
         movieServices.deleteMovie(parseInt(id)).then(res => {
-            if (res) getData();
-            exitEditMode();
-            setFormIsActive(false);
-            alert(`Movie: ${res.name} erased`);
+            if (res) {
+                console.log(res)
+                getData();
+                openModal(`Movie: ${res.name} erased`);
+            }
         })
     }
 
@@ -61,9 +72,7 @@ export const List = (props) => {
     const addItem = (item) => {
         movieServices.postMovie(item).then(res => {
             if (res) getData();
-            alert(`${res.name} added! Movie id: ${res.id}`);
-            exitEditMode();
-            setFormIsActive(false);
+            openModal(`${res.name} added! Movie id: ${res.id}`);
         })
     }
 
@@ -78,59 +87,103 @@ export const List = (props) => {
     }
 
     const updateItem = (movie, id) => {
-        console.log(id)
+        console.log(movie, id)
         movieServices.updateMovie(movie, parseInt(id)).then(res => {
             if (res) getData();
-            exitEditMode();
-            setFormIsActive(false);
-            alert(`${res.name} updated! Movie id: ${res.id}`)
+            openModal(`${res.name} updated! Movie id: ${res.id}`);
         })
     }
 
+
     const fav = (movie) => {
-
         if (movie.isFav) movie.isFav = !movie.isFav;
-        else movie = { ...movie, isFav: true }
-
+        else movie = { ...movie, isFav: true };
         movieServices.updateMovie(movie, movie.id).then(res => {
-            console.log(res.isFav)
             if (res) getData();
             exitEditMode();
             getFavMovies();
         })
-
     }
 
     const toggleForm = () => {
         setFormIsActive(!formIsActive);
     }
 
-    // const FavElement = () => {
-    //     const [element, setElement] = useState(<div className='fav-slider skeleton'></div>)
-    //     useEffect(() => {
-    //         setTimeout(() => {
-    //             setElement(<FavMovies favMovies={favMovies} />)
-    //         }, 55);
-    //     }, [element])
-    //     return (element)
-    // }
+    const openModal = (data) => {
+        setIsModalACtive(true);
+        setMsg(data);
+    }
+
+    const closeModal = () => {
+        exitEditMode();
+        setFormIsActive(false);
+        setIsModalACtive(false);
+        setMsg();
+    }
+
+    const askConfirmation = (text, data) => {
+        openModal(text);
+        setModalData(data);
+    }
+
+    const confirm = (data) => {
+        let action = data.action;
+        let id = parseInt(data.id);
+        let movie = data.movie;
+        let s = 0;
+        let ms = s * 1000;
+        
+        switch (action) {
+            case 'delete':
+                setTimeout(() => deleteItem(id), ms);
+                break;
+            case 'update':
+                setTimeout(() => updateItem(movie, id), ms);
+                break;
+            case 'add':
+                setTimeout(() => addItem(movie), ms);
+                break;
+        }
+    }
 
     return (
         <div className='container'>
+            {isModalActive ? <Modal msg={msg} confirm={confirm} closeModal={closeModal} modalData={modalData} /> : null}
             {favMovies.length > 0 ? <Slider favMovies={favMovies} /> : <div className='fav-slider skeleton'></div>}
-            {/* {favMovies.length > 0 ? <FavMovies favMovies={favMovies} /> : <div className='fav-slider skeleton'></div>} */}
-            <>{!formIsActive ? <div className='list skeleton'> {movies.map((movie, key) => (
-                <Card key={key} movie={movie} deleteItem={deleteItem} toggleForm={toggleForm} nextMovieToPreview={nextMovieToPreview} fav={fav} />
+            <>{!formIsActive ? <div className='list'> {movies.map((movie, key) => (
+                <>{!isLoading ? <Card key={key} movie={movie} deleteItem={deleteItem} toggleForm={toggleForm} nextMovieToPreview={nextMovieToPreview} fav={fav} askConfirmation={askConfirmation} /> : null}</>
             )).reverse()}
-            </div> : null}</>
+            </div> : null}
+                <>{isLoading ? <Loader /> : null}</>
+            </>
             {!formIsActive ?
                 <button className='form-button' onClick={() => { toggleForm(); exitEditMode() }}>ADD</button>
                 : null}
 
             {formIsActive ?
-                < Form addItem={addItem} toggleForm={toggleForm} movieToPreview={movieToPreview} updateItem={updateItem} isEditMode={isEditMode} />
+                < Form addItem={addItem} toggleForm={toggleForm} movieToPreview={movieToPreview} updateItem={updateItem} isEditMode={isEditMode} confirm={confirm} closeModal={closeModal}/>
                 : null}
 
         </div>
     )
 }
+
+// let fetchConf = useCallback(async () => {
+//     return confirmation
+// }, [confirmation])
+
+// let promiseConf = useCallback(async () => {
+//     let data = await fetchConf();
+//     return data;
+// }, [confirmation])
+
+// let promise = new Promise((resolve, reject) => {
+//     if (confirmation !== undefined) return resolve(confirmation);
+//     else {
+//         let timer = setInterval(()=>{
+//             console.log(confirmation)
+//         },1000)
+//     }
+// })
+
+//favMovies with scroll => {/* {favMovies.length > 0 ? <FavMovies favMovies={favMovies} /> : <div className='fav-slider skeleton'></div>} */}

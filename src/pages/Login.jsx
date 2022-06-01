@@ -2,12 +2,13 @@ import { Component, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Nav } from "../components/Nav";
 import { Footer } from "../components/Footer";
+import { Modal } from "../components/Modal";
 
-export const Login = () =>{
-    useEffect(()=>{
+export const Login = () => {
+    useEffect(() => {
         swipeBack();
     })
-    
+
     const swipeBack = () => {
         let start;
         let end;
@@ -17,7 +18,7 @@ export const Login = () =>{
             touched++
             start = e.changedTouches[0].clientX;
         }
-        
+
         window.ontouchend = (e) => {
             touched++
             end = e.changedTouches[0].clientX;
@@ -31,7 +32,7 @@ export const Login = () =>{
         <section className="wrapper">
             <Nav />
             <div className="container">
-
+               
             </div>
             <Footer />
         </section>

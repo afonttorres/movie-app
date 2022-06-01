@@ -10,7 +10,7 @@ export const Card = (props) => {
     }, [props.movie])
 
     const deleteMovie = (id) => {
-        props.deleteItem(id);
+        props.askConfirmation('Are you sure?', { id: id, action: 'delete' });
     }
     const editMovie = (movieToEdit) => {
         props.toggleForm();

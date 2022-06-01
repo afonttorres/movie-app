@@ -16,13 +16,11 @@ export const Slider = (props) => {
     }, [index])
 
     const goBack = () => {
-        if (index < 1) setIndex(favMovies.length - 1);
-        else setIndex(index - 1);
+        (index < 1) ? setIndex(favMovies.length - 1) : setIndex(index - 1);
     }
 
     const goNext = () => {
-        if (index === favMovies.length - 1) setIndex(0);
-        else setIndex(index + 1);
+        (index === favMovies.length - 1) ? setIndex(0) : setIndex(index + 1);
     }
 
     const changeIndex = (i) => {
@@ -35,12 +33,12 @@ export const Slider = (props) => {
             <div className='slider-container'>
                 {favMovies ? favMovies.map((movie, key) =>
                     <>{key === index ?
-                        <div className='slider-text-container'>
-                            <img className='slider-img' key={key} src={movie.imgUrl} />
+                        <div key={key} className='slider-text-container'>
+                            <img className='slider-img' src={movie.imgUrl} />
                             <p className='slider-text font'>{movie.name}</p>
                         </div> : null}</>
                 ) : null}
-                <ul className='dot-container'>{favMovies ? favMovies.map((movie, key) => <li onClick={() => changeIndex(key)} className='dot'><i className={key === index ? "fa-solid fa-circle selected-dot" : 'fa-solid fa-circle'}></i></li>) : null}</ul>
+                <ul className='dot-container'>{favMovies ? favMovies.map((movie, key) => <li key={key} onClick={() => changeIndex(key)} className='dot'><i className={key === index ? "fa-solid fa-circle selected-dot" : 'fa-solid fa-circle'}></i></li>) : null}</ul>
             </div>
             <span onClick={goNext} className='slider-button'><i className="fa-solid fa-angle-right"></i></span>
         </div>

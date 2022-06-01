@@ -4,6 +4,7 @@ import '../pages/searcher.css'
 import { useEffect, useState } from "react";
 import { movieServices } from "../services/movieServices";
 import { Link } from "react-router-dom";
+import { Loader } from "../components/Loader";
 
 
 
@@ -11,6 +12,7 @@ export const Searcher = () => {
 
     const [search, setSearch] = useState('');
     const [suggetions, setSuggestions] = useState([]);
+    const [isLoading, setisLoading] = useState(false);
 
     useEffect(() => {
         swipeBack();
@@ -38,16 +40,10 @@ export const Searcher = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        let suggCont = document.querySelector('.suggestions-container');
-        let cont = document.querySelector('.container');
-        let spinner = `<div class="spinner-align"><div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div></div>`;
-        cont.removeChild(suggCont);
-        cont.insertAdjacentHTML('beforeend', spinner);
-        setTimeout(() => {
-            cont.removeChild(cont.childNodes[1]);
-            cont.appendChild(suggCont);
-            setSearch('');
-        }, 3000)
+        let s = 3;
+        let ms = s * 1000;
+        setisLoading(true);
+        setTimeout(() => setisLoading(false), ms)
     }
 
     const handleInputChange = (e) => {
@@ -61,7 +57,7 @@ export const Searcher = () => {
     }
 
 
-    console.log(suggetions);
+    console.log(isLoading);
 
     return (
         <section className="wrapper">
@@ -71,14 +67,14 @@ export const Searcher = () => {
                     <input onChange={handleInputChange} value={search} className="searcher-input" type="text" name="searcher" placeholder="Type your search!" />
                     <button className="searcher-button"><i className="fa-solid fa-magnifying-glass"></i></button>
                 </form>
-                <div className="suggestions-container">{suggetions.map((suggestion, key) => (
-
+                <>{isLoading ? <Loader /> : null}</>
+                <div className={!isLoading ? 'suggestions-container' : 'd-none'}>{suggetions.map((suggestion, key) => (
                     <Link to={`/movie-info/${suggestion.id}`}> <img src={suggestion.imgUrl} alt="" className="card-font suggestion" key={key} /></Link>
 
                 ))}
                 </div>
             </div>
             <Footer />
-        </section>
+        </section >
     )
 }
