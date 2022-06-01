@@ -33,7 +33,7 @@ export const List = (props) => {
     const getData = () => {
         movieServices.getAllMovies().then(res => {
             setMovies(res)
-            let s = .5;
+            let s = .05;
             let ms = s * 1000;
             if (res) setTimeout(() => setIsLoading(false), ms)
         })
@@ -54,19 +54,6 @@ export const List = (props) => {
                 openModal(`Movie: ${res.name} erased`);
             }
         })
-    }
-
-    const addLoop = () => {
-        let movie = {
-            name: "shrek",
-            genre: "animación, aventura, comedia",
-            year: "2001",
-            valoration: "9.5",
-            imgUrl: "https://enfilme.com/img/content/schrek_poster_Enfilme_v3024_675_489.jpeg"
-        }
-        for (let i = 0; i < 5; i++) {
-            addItem(movie)
-        }
     }
 
     const addItem = (item) => {
@@ -132,7 +119,7 @@ export const List = (props) => {
         let movie = data.movie;
         let s = 0;
         let ms = s * 1000;
-        
+
         switch (action) {
             case 'delete':
                 setTimeout(() => deleteItem(id), ms);
@@ -150,18 +137,21 @@ export const List = (props) => {
         <div className='container'>
             {isModalActive ? <Modal msg={msg} confirm={confirm} closeModal={closeModal} modalData={modalData} /> : null}
             {favMovies.length > 0 ? <Slider favMovies={favMovies} /> : <div className='fav-slider skeleton'></div>}
-            <>{!formIsActive ? <div className='list'> {movies.map((movie, key) => (
+            <>{!isLoading ? <p className="section-title font">Your movies</p> : null}</>
+            <div className='list'> {movies.map((movie, key) => (
                 <>{!isLoading ? <Card key={key} movie={movie} deleteItem={deleteItem} toggleForm={toggleForm} nextMovieToPreview={nextMovieToPreview} fav={fav} askConfirmation={askConfirmation} /> : null}</>
             )).reverse()}
-            </div> : null}
-                <>{isLoading ? <Loader /> : null}</>
-            </>
-            {!formIsActive ?
+
+            </div>
+
+            <>{isLoading ? <Loader /> : null}</>
+
+            {!formIsActive && !isLoading ?
                 <button className='form-button' onClick={() => { toggleForm(); exitEditMode() }}>ADD</button>
                 : null}
 
             {formIsActive ?
-                < Form addItem={addItem} toggleForm={toggleForm} movieToPreview={movieToPreview} updateItem={updateItem} isEditMode={isEditMode} confirm={confirm} closeModal={closeModal}/>
+                < Form addItem={addItem} toggleForm={toggleForm} movieToPreview={movieToPreview} updateItem={updateItem} isEditMode={isEditMode} confirm={confirm} closeModal={closeModal} />
                 : null}
 
         </div>

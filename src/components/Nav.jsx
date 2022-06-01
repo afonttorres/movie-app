@@ -8,7 +8,7 @@ export const Nav = () => {
                 <li className="nav-item main-nav-item"><i className="fa-solid fa-skull"></i></li>
                 <li className='font nav-item mobile'> <Link to='/home'>HOME</Link></li>
                 <li className='font nav-item mobile'> <Link to='/login'>LOGIN</Link></li>
-                <li className='font nav-item mobile'> <Link to='/login'>SEARCH <i className="fa-solid fa-magnifying-glass"></i></Link></li>
+                <li className='font nav-item mobile'> <Link to='/search'>SEARCH <i className="fa-solid fa-magnifying-glass"></i></Link></li>
             </ul>
         </nav>
     )

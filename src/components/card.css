@@ -15,18 +15,21 @@
     cursor: pointer;
 }
 
-.card:hover{
+.card:hover {
     height: 62%;
     width: 16%;
     border: 2px solid var(--main-font-color);
 }
-.card-opacity{
+
+.card-opacity {
     background-color: var(--opacity);
     border-radius: var(--border-radius);
 }
-.card-opacity:hover{
+
+.card-opacity:hover {
     background-color: transparent;
 }
+
 .card-button-container {
     height: 60%;
     width: 100%;
@@ -34,7 +37,7 @@
     border-radius: 0.75rem 0.75rem 0 0;
 }
 
-.img{
+.img {
     border-radius: 0.75rem 0.75rem 0 0;
     object-fit: cover;
 }
@@ -68,7 +71,7 @@
     margin: 0 auto;
 }
 
-.card-font{
+.card-font {
     text-align: center;
     color: var(--bg);
     font-family: var(--main-font);
@@ -95,13 +98,18 @@
     color: var(--main-font-color);
     z-index: 3;
 }
-.fav-icon-unfav{
+
+.fav-icon-unfav {
     color: var(--main-font-color);
 }
-.fav-icon-fav{
+
+.fav-icon-fav {
     color: var(--bg);
 }
-.deleteButton, .editButton, .infoButton{
+
+.deleteButton,
+.editButton,
+.infoButton {
     width: 20%;
     height: 25%;
     position: absolute;
@@ -115,28 +123,49 @@
     text-align: center;
     line-height: 2.5;
     z-index: 3;
+    cursor: pointer;
 }
 
-.editButton{
+.editButton {
     top: 30%;
 }
 
-.infoButton{
+.infoButton {
     top: 55%;
 }
 
-.buttonSelected{
+.buttonSelected {
     color: var(--main-font-color);
 }
+
 @media only screen and (max-width: 820px) {
-    .card {
+    /* .card {
         width: 44%;
         height: 50%;
+    } */
+
+    .card:hover {
+        width: 10.5rem;
+        height: 95%;
+        border: 2px solid var(--main-font-color);
     }
 
-    .card:hover{
-        width: 44%;
-        height: 50%;
-        border: 2px solid var(--main-font-color);
+    .list {
+        height: 25%;
+        width: 85%;
+        display: grid;
+        border-radius: 0.75rem;
+        overflow-y: hidden;
+        overflow-x: scroll;
+        column-gap: 5%;
+        grid-auto-flow: column;
+        flex-basis: auto;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .card {
+        width: 10rem;
+        height: 90%;
     }
 }
