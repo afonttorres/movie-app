@@ -51,6 +51,7 @@ export const List = (props) => {
             if (res) {
                 console.log(res)
                 getData();
+                getFavMovies();
                 openModal(`Movie: ${res.name} erased`);
             }
         })
@@ -58,8 +59,10 @@ export const List = (props) => {
 
     const addItem = (item) => {
         movieServices.postMovie(item).then(res => {
-            if (res) getData();
-            openModal(`${res.name} added! Movie id: ${res.id}`);
+            if (res) {
+                getData();
+                openModal(`${res.name} added! Movie id: ${res.id}`);
+            }
         })
     }
 
@@ -76,8 +79,11 @@ export const List = (props) => {
     const updateItem = (movie, id) => {
         console.log(movie, id)
         movieServices.updateMovie(movie, parseInt(id)).then(res => {
-            if (res) getData();
-            openModal(`${res.name} updated! Movie id: ${res.id}`);
+            if (res) {
+                getData();
+                getFavMovies();
+                openModal(`${res.name} updated! Movie id: ${res.id}`);
+            }
         })
     }
 
@@ -157,23 +163,5 @@ export const List = (props) => {
         </div>
     )
 }
-
-// let fetchConf = useCallback(async () => {
-//     return confirmation
-// }, [confirmation])
-
-// let promiseConf = useCallback(async () => {
-//     let data = await fetchConf();
-//     return data;
-// }, [confirmation])
-
-// let promise = new Promise((resolve, reject) => {
-//     if (confirmation !== undefined) return resolve(confirmation);
-//     else {
-//         let timer = setInterval(()=>{
-//             console.log(confirmation)
-//         },1000)
-//     }
-// })
 
 //favMovies with scroll => {/* {favMovies.length > 0 ? <FavMovies favMovies={favMovies} /> : <div className='fav-slider skeleton'></div>} */}
