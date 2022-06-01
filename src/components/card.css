@@ -1,12 +1,11 @@
 @import url(../App.css);
 
 .card {
-    height: 60%;
-    width: 14%;
+    width: 10rem;
+    height: 90%;
     margin: 2.5%;
     display: flex;
     flex-direction: column;
-    /* border: 1px solid var(--border-color); */
     background-size: cover;
     background-position: center;
     border-radius: var(--border-radius);
@@ -16,8 +15,8 @@
 }
 
 .card:hover {
-    height: 62%;
-    width: 16%;
+    width: 10.5rem;
+    height: 95%;
     border: 2px solid var(--main-font-color);
 }
 
@@ -100,11 +99,13 @@
 }
 
 .fav-icon-unfav {
-    color: var(--main-font-color);
+    color: rgba(255, 255, 255, 60%);
+
+
 }
 
 .fav-icon-fav {
-    color: var(--bg);
+    color: rgba(255, 195, 0, 100%);
 }
 
 .deleteButton,
@@ -138,34 +139,4 @@
     color: var(--main-font-color);
 }
 
-@media only screen and (max-width: 820px) {
-    /* .card {
-        width: 44%;
-        height: 50%;
-    } */
-
-    .card:hover {
-        width: 10.5rem;
-        height: 95%;
-        border: 2px solid var(--main-font-color);
-    }
-
-    .list {
-        height: 30%;
-        width: 85%;
-        display: grid;
-        border-radius: 0.75rem;
-        overflow-y: hidden;
-        overflow-x: scroll;
-        column-gap: 5%;
-        grid-auto-flow: column;
-        flex-basis: auto;
-        justify-content: flex-start;
-        align-items: center;
-    }
-
-    .card {
-        width: 10rem;
-        height: 90%;
-    }
-}
+@media only screen and (max-width: 820px) {}

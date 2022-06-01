@@ -2,13 +2,13 @@ import '../components/list.css'
 import { Form } from './Form';
 import { movieServices } from '../services/movieServices';
 import { Card } from './Card';
-import { FavMovies } from './FavMovies';
+// import { FavMovies } from './FavMovies';
 import { Slider } from './Slider';
 import { Modal } from './Modal';
 import { Loader } from './Loader';
 
 
-const { useEffect, useState, useCallback, useMemo } = require("react");
+const { useEffect, useState } = require("react");
 
 export const List = (props) => {
 
@@ -58,6 +58,7 @@ export const List = (props) => {
     }
 
     const addItem = (item) => {
+        console.log('hi')
         movieServices.postMovie(item).then(res => {
             if (res) {
                 getData();
@@ -136,21 +137,41 @@ export const List = (props) => {
             case 'add':
                 setTimeout(() => addItem(movie), ms);
                 break;
+            default:
+                console.log(`Couldn't find ${action}`);
         }
     }
 
     return (
         <div className='container'>
             {isModalActive ? <Modal msg={msg} confirm={confirm} closeModal={closeModal} modalData={modalData} /> : null}
-            {favMovies.length > 0 ? <Slider favMovies={favMovies} /> : <div className='fav-slider skeleton'></div>}
-            <>{!isLoading ? <p className="section-title font">Your movies</p> : null}</>
-            <div className='list'> {movies.map((movie, key) => (
-                <>{!isLoading ? <Card key={key} movie={movie} deleteItem={deleteItem} toggleForm={toggleForm} nextMovieToPreview={nextMovieToPreview} fav={fav} askConfirmation={askConfirmation} /> : null}</>
-            )).reverse()}
+            {favMovies.length > 0 ? <Slider favMovies={favMovies} /> : <div className='slider skeleton'></div>}
 
+            <div className='list'>
+                <div className='list-title-container'>
+                    <>{!isLoading ? <p className="list-title font">All movies</p> : null}</>
+                </div>
+                <div className='list-card-container'>
+                    {movies.map((movie, key) => (
+                        <>{!isLoading ? <Card key={key} movie={movie} deleteItem={deleteItem} toggleForm={toggleForm} nextMovieToPreview={nextMovieToPreview} fav={fav} askConfirmation={askConfirmation} /> : null}</>
+                    )).reverse()}
+                </div>
             </div>
 
             <>{isLoading ? <Loader /> : null}</>
+
+            <div className='list'>
+                <div className='list-title-container'>
+                    <>{!isLoading ? <p className="list-title font">Your favorite movies</p> : null}</>
+                </div>
+                <div className='list-card-container'>
+                    {favMovies.map((movie, key) => (
+                        <>{!isLoading ? <Card key={key} movie={movie} deleteItem={deleteItem} toggleForm={toggleForm} nextMovieToPreview={nextMovieToPreview} fav={fav} askConfirmation={askConfirmation} /> : null}</>
+                    )).reverse()}
+                </div>
+            </div>
+
+            <noscript>still 20% up inside container in mobile </noscript>
 
             {!formIsActive && !isLoading ?
                 <button className='form-button' onClick={() => { toggleForm(); exitEditMode() }}>ADD</button>

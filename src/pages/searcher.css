@@ -47,6 +47,7 @@
     justify-content: space-around;
     align-items: flex-start;
     overflow-y: scroll;
+    scroll-behavior: smooth;
 }
 
 .suggestion {

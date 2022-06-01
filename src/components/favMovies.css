@@ -23,7 +23,7 @@
     position: relative;
 }
 
-.slider-card, .slider-img{
+.slider-card {
     border-radius: .75rem;
 }
 
@@ -39,7 +39,7 @@
     padding-left: 5%;
 }
 
-.toggleButton{
+.toggleButton {
     position: fixed;
     height: 5%;
     width: 11%;

@@ -13,7 +13,7 @@ export const Slider = (props) => {
         let milisecs = 3000;
         let timerID = setInterval(goNext, milisecs);
         return () => clearInterval(timerID);
-    }, [index])
+    }, [index, props.favMovies])
 
     const goBack = () => {
         (index < 1) ? setIndex(favMovies.length - 1) : setIndex(index - 1);
@@ -34,7 +34,7 @@ export const Slider = (props) => {
                 {favMovies ? favMovies.map((movie, key) =>
                     <>{key === index ?
                         <div key={key} className='slider-text-container'>
-                            <img className='slider-img' src={movie.imgUrl} />
+                            <img className='slider-img' src={movie.imgUrl} alt='Movie' />
                             <p className='slider-text font'>{movie.name}</p>
                         </div> : null}</>
                 ) : null}
