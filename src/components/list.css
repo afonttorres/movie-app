@@ -77,6 +77,7 @@
     position: fixed;
     bottom: 15vh;
     right: 10vw;
+    z-index: 4;
 }
 
 /*still 20% up inside container in mobile */
