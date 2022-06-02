@@ -53,12 +53,17 @@
 
 .suggestion {
     height: 25%;
-    width: 11%;
+    width: 10%;
     color: white;
-    margin: 2.5%;
+    margin: 1.5%;
     border-radius: 50%;
     object-fit: cover;
     object-position: center;
+}
+
+.suggestion:hover{
+    opacity: 80%;
+    border: 1px solid var(--opacity);
 }
 
 @media only screen and (max-width: 820px) {
@@ -73,5 +78,7 @@
     .suggestion{
         height: 15%;
         width: 25%;
+        margin: 2.5%;
+        border-radius: 50%;
     }
 }
