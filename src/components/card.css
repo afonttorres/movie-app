@@ -1,7 +1,7 @@
 @import url(../App.css);
 
 .card {
-    width: 10rem;
+    width: 13rem;
     height: 90%;
     margin: 2.5%;
     display: flex;
@@ -15,7 +15,7 @@
 }
 
 .card:hover {
-    width: 10.5rem;
+    width: 13.5rem;
     height: 95%;
     border: 2px solid var(--main-font-color);
 }
@@ -141,4 +141,12 @@
     color: var(--main-font-color);
 }
 
-@media only screen and (max-width: 820px) {}
+@media only screen and (max-width: 820px) {
+    .card {
+        width: 10rem;
+    }
+
+    .card:hover {
+        width: 10.5rem;
+    }
+}

@@ -1,14 +1,14 @@
-import { Component, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Nav } from './Nav';
 import { Footer } from './Footer';
 import '../components/movieinfo.css';
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { movieServices } from "../services/movieServices";
 
 
 export const MovieInfo = () => {
     const [movieInfo, setMovieInfo] = useState();
-    const [id, setId] = useState(parseInt(useParams().id))
+    const [id] = useState(parseInt(useParams().id))
 
     useEffect(() => {
         movieServices.getMovie(id).then(res => {

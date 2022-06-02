@@ -15,6 +15,8 @@
 .movie-info-img {
     border-radius: 0.75rem;
     object-fit: cover;
+    height: 100%;
+    width: 100%;
 }
 
 .info {
@@ -28,6 +30,7 @@
     flex-direction: row;
     width: 80%;
     height: fit-content;
+    justify-content: center;
 }
 
 .movie-info-col {
