@@ -64,7 +64,7 @@ export const Searcher = () => {
             <Nav />
             <div className="container">
                 <form className="searcher-form" onSubmit={handleSubmit}>
-                    <input onChange={handleInputChange} value={search} className="searcher-input" type="text" name="searcher" placeholder="Type your search!" />
+                    <input onChange={handleInputChange} value={search} className="font searcher-input" type="text" name="searcher" placeholder="Type your search!" />
                     <button className="searcher-button"><i className="fa-solid fa-magnifying-glass"></i></button>
                 </form>
                 <>{isLoading ? <Loader /> : null}</>

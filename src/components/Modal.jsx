@@ -43,10 +43,6 @@ export const Modal = (props) => {
         props.confirm(modalData);
     }
 
-    const cancel = () => {
-        props.cancel();
-    }
-
     return (
         <div className='modal-container'>
             <dialog className='modal'>

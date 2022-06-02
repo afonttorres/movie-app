@@ -11,12 +11,14 @@ export const Footer = (props) => {
 
     return (
         <footer className="footer">
-            <ul className='footer-item-container'>
-                <Link to='/home'> <li className={path === 'home' ? 'footer-item current-footer': 'footer-item'}><i className="fa-solid fa-house"></i></li></Link>
-                <Link to='/search'><li className={path === 'search' ? 'footer-item current-footer': 'footer-item'}><i className="fa-solid fa-magnifying-glass"></i></li></Link>
-                <li className={path === 'new-in' ? 'footer-item current-footer': 'footer-item'}><i className="fa-solid fa-newspaper"></i></li>
-                <li className={path === 'profile' ? 'footer-item current-footer': 'footer-item'}><i className="fa-solid fa-skull-crossbones"></i></li>
-            </ul>
+            <div className='footer-opacity'>
+                <ul className='footer-item-container'>
+                    <Link to='/home'> <li className={(path === 'home') || (path !== 'login' && path !== 'search') ? 'footer-item current-footer' : 'footer-item'}><i className="fa-solid fa-house"></i></li></Link>
+                    <Link to='/search'><li className={path === 'search' ? 'footer-item current-footer' : 'footer-item'}><i className="fa-solid fa-magnifying-glass"></i></li></Link>
+                    <li className={path === 'new-in' ? 'footer-item current-footer' : 'footer-item'}><i className="fa-solid fa-newspaper"></i></li>
+                    <li className={path === 'profile' ? 'footer-item current-footer' : 'footer-item'}><i className="fa-solid fa-skull-crossbones"></i></li>
+                </ul>
+            </div>
         </footer>
     )
 }

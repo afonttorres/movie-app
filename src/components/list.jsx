@@ -147,40 +147,56 @@ export const List = (props) => {
             {isModalActive ? <Modal msg={msg} confirm={confirm} closeModal={closeModal} modalData={modalData} /> : null}
             {favMovies.length > 0 ? <Slider favMovies={favMovies} /> : <div className='slider skeleton'></div>}
 
-            <div className='list'>
-                <div className='list-title-container'>
-                    <>{!isLoading ? <p className="list-title font">All movies</p> : null}</>
+            <div className='scrollable-content-container'>
+                <div className='scrollable-content'>
+
+                <>{isLoading ? <Loader /> : null}</>
+
+                <div className='list'>
+                    <div className='list-title-container'>
+                        <>{!isLoading ? <p className="list-title font">All movies</p> : null}</>
+                    </div>
+                    <div className='list-card-container'>
+                        {movies.map((movie, key) => (
+                            <>{!isLoading ? <Card key={key} movie={movie} deleteItem={deleteItem} toggleForm={toggleForm} nextMovieToPreview={nextMovieToPreview} fav={fav} askConfirmation={askConfirmation} /> : null}</>
+                        )).reverse()}
+                    </div>
                 </div>
-                <div className='list-card-container'>
-                    {movies.map((movie, key) => (
-                        <>{!isLoading ? <Card key={key} movie={movie} deleteItem={deleteItem} toggleForm={toggleForm} nextMovieToPreview={nextMovieToPreview} fav={fav} askConfirmation={askConfirmation} /> : null}</>
-                    )).reverse()}
+
+
+                <div className='list'>
+                    <div className='list-title-container'>
+                        <>{!isLoading ? <p className="list-title font">Your favorite movies</p> : null}</>
+                    </div>
+                    <div className='list-card-container'>
+                        {favMovies.map((movie, key) => (
+                            <>{!isLoading ? <Card key={key} movie={movie} deleteItem={deleteItem} toggleForm={toggleForm} nextMovieToPreview={nextMovieToPreview} fav={fav} askConfirmation={askConfirmation} /> : null}</>
+                        )).reverse()}
+                    </div>
+                </div>
+
+                <div className='list'>
+                    <div className='list-title-container'>
+                        <>{!isLoading ? <p className="list-title font">Your favorite movies</p> : null}</>
+                    </div>
+                    <div className='list-card-container'>
+                        {favMovies.map((movie, key) => (
+                            <>{!isLoading ? <Card key={key} movie={movie} deleteItem={deleteItem} toggleForm={toggleForm} nextMovieToPreview={nextMovieToPreview} fav={fav} askConfirmation={askConfirmation} /> : null}</>
+                        )).reverse()}
+                    </div>
+                </div>
+
+                <noscript>still 20% up inside container in mobile </noscript>
+
+                {!formIsActive && !isLoading ?
+                    <button className='open-form-button' onClick={() => { toggleForm(); exitEditMode() }}>ADD</button>
+                    : null}
+
+                {formIsActive ?
+                    < Form addItem={addItem} toggleForm={toggleForm} movieToPreview={movieToPreview} updateItem={updateItem} isEditMode={isEditMode} confirm={confirm} closeModal={closeModal} />
+                    : null}
                 </div>
             </div>
-
-            <>{isLoading ? <Loader /> : null}</>
-
-            <div className='list'>
-                <div className='list-title-container'>
-                    <>{!isLoading ? <p className="list-title font">Your favorite movies</p> : null}</>
-                </div>
-                <div className='list-card-container'>
-                    {favMovies.map((movie, key) => (
-                        <>{!isLoading ? <Card key={key} movie={movie} deleteItem={deleteItem} toggleForm={toggleForm} nextMovieToPreview={nextMovieToPreview} fav={fav} askConfirmation={askConfirmation} /> : null}</>
-                    )).reverse()}
-                </div>
-            </div>
-
-            <noscript>still 20% up inside container in mobile </noscript>
-
-            {!formIsActive && !isLoading ?
-                <button className='form-button' onClick={() => { toggleForm(); exitEditMode() }}>ADD</button>
-                : null}
-
-            {formIsActive ?
-                < Form addItem={addItem} toggleForm={toggleForm} movieToPreview={movieToPreview} updateItem={updateItem} isEditMode={isEditMode} confirm={confirm} closeModal={closeModal} />
-                : null}
-
         </div>
     )
 }

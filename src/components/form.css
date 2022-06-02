@@ -43,6 +43,7 @@
     outline: none;
     padding-left: 2.5%;
     font-family: var(--main-font);
+    height: 20%;
 }
 
 .input-container :first-child, .input-container :nth-child(2){
@@ -64,8 +65,8 @@
 }
 
 .add-button {
-    height: 75%;
-    width: 22%;
+    height: 5vh;
+    width: 5vh;
     border-radius: 0.25rem;
     border: 2px solid var(--main-font-color);
     color: var(--main-font-color);

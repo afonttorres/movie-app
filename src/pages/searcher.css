@@ -22,6 +22,7 @@
     outline: none;
     padding-left: 2.5%;
     font-family: var(--main-font);
+    font-size: medium;
 }
 
 .searcher-button {
@@ -51,9 +52,9 @@
 }
 
 .suggestion {
+    height: 25%;
+    width: 11%;
     color: white;
-    height: 15%;
-    width: 25%;
     margin: 2.5%;
     border-radius: 50%;
     object-fit: cover;
@@ -65,5 +66,12 @@
     .searcher-form,
     .suggestions-container {
         width: 80%;
+    }
+    .searcher-input{
+        font-size: small;
+    }
+    .suggestion{
+        height: 15%;
+        width: 25%;
     }
 }

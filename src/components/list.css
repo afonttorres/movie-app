@@ -2,18 +2,40 @@
 @import url(../components/card.css);
 
 .list {
-    height: 30%;
+    height: 30vh;
     width: 85%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 0.75rem;
+    position: relative;
+}
+
+.scrollable-content-container {
+    top: 43vh;
+    left: 0;
+    height: 57vh;
+    width: 100%;
+    position: fixed;
+    overflow-y: scroll;
+}
+
+.scrollable-content{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding-bottom: 10vh;
+    gap: 3vh;
 }
 
 .list-title-container {
     height: 10%;
     width: 100%;
+    position: relative;
 }
 
 .list-title {
@@ -22,6 +44,7 @@
     text-transform: none;
     margin-left: 2.5%;
     font-weight: 800;
+    font-size: medium;
 }
 
 .list-card-container {
@@ -37,11 +60,12 @@
     justify-content: flex-start;
     align-items: center;
     scroll-behavior: smooth;
+    position: relative;
 }
 
-.form-button {
-    height: 5%;
-    width: 5%;
+.open-form-button {
+    height: 5vh;
+    width: 5vh;
     border-radius: 0.25rem;
     border: 2px solid var(--main-font-color);
     color: var(--main-font-color);
@@ -50,20 +74,34 @@
     outline: none;
     cursor: pointer;
     background-color: var(--bg);
+    position: fixed;
+    bottom: 15vh;
+    right: 10vw;
 }
 
 /*still 20% up inside container in mobile */
 
 @media only screen and (max-width: 820px) {
+    .list{
+        height: 25vh;
+    }
     .list-title {
         margin-left: 10%;
     }
 
-    .list-card-container{
+    .list-card-container {
         column-gap: 5%;
     }
 
     .form-button {
         width: 20%;
+    }
+
+    .scrollable-content-container {
+        top: 33.5vh;
+        height: 56.5vh;
+    }
+    .scrollable-content{
+        gap: 1vh;
     }
 }

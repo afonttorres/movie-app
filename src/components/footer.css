@@ -1,11 +1,22 @@
 .footer {
     display: none;
     height: 10%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 4;
     width: 100%;
+    background-color: var(--bg);
+}
+
+.footer-opacity{
     background-color: var(--opacity);
+    height: 100%;
+    width: 100%;
 }
 
 .footer-item-container {
+    height: 100%;
     width: 65%;
     margin: 0 auto;
     display: flex;

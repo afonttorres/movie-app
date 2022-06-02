@@ -23,6 +23,8 @@
 .card-opacity {
     background-color: var(--opacity);
     border-radius: var(--border-radius);
+    height: 100%;
+    width: 100%;
 }
 
 .card-opacity:hover {
