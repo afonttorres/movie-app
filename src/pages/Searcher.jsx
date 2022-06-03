@@ -70,6 +70,8 @@ export const Searcher = () => {
         else setSuggestions([]);
     }
 
+    console.log(suggetions)
+
     return (
         <section className="wrapper">
             <Nav logged={logged} />
