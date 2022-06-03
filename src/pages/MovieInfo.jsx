@@ -9,7 +9,18 @@ import '../pages/movieinfo.css';
 
 export const MovieInfo = () => {
     const [movieInfo, setMovieInfo] = useState();
-    const [id] = useState(parseInt(useParams().id))
+    const [id] = useState(parseInt(useParams().id));
+    const [logged, setLogged] = useState();
+
+    useEffect(() => {
+        movieServices.getProfiles().then(res => {
+            if (res) {
+                let loggedProf = res.filter(profile => profile.isLogged === true);
+                setLogged(loggedProf[0]);
+            }
+        })
+
+    }, [])
 
     useEffect(() => {
         movieServices.getMovie(id).then(res => {
@@ -39,7 +50,7 @@ export const MovieInfo = () => {
 
     return (
         <section className="wrapper ">
-            <Nav />
+            <Nav logged={logged}/>
             <div className="container">
                 <Link to='/home'><p className="movieInfo-goBack-button"><i className="fa-solid fa-xmark"></i></p></Link>
                 {movieInfo ?
@@ -59,7 +70,7 @@ export const MovieInfo = () => {
                     </article>
                     : null}
             </div>
-            <Footer />
+            <Footer logged={logged} />
         </section>
     )
 }

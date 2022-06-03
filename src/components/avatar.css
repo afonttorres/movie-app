@@ -18,6 +18,7 @@
     position: relative;
     outline: none;
     transition: 1s ease;
+    background-color: var(--big-button-color);
 }
 
 .avatar-img {

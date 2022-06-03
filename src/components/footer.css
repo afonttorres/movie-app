@@ -59,7 +59,19 @@
     transition: 1s ease;
 }
 
-.footer-avatar:hover, .footer-avatar:focus{
+.footer-noAvatar {
+    height: 5vh;
+    width: 5vh;
+    border-radius: 50%;
+    outline: none;
+    background-color: var(--big-button-color);
+    border: 1px solid var(--main-font-color);
+    transition: 1s ease;
+    visibility: hidden;
+}
+
+.footer-avatar:hover,
+.footer-avatar:focus {
     border: 2px solid var(--main-font-color);
     box-shadow: none;
     opacity: 100%;

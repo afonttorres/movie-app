@@ -7,19 +7,16 @@ import { movieServices } from '../services/movieServices';
 
 export const Footer = (props) => {
     const [path, setPath] = useState(window.location.pathname.slice(1, window.location.pathname.length));
-    const [profile, setProfile] = useState();
+    const [logged, setLogged] = useState(props.logged);
 
     useEffect(() => {
         setPath(window.location.pathname.slice(1, window.location.pathname.length))
-        movieServices.getProfiles().then(res => {
-            if (res) {
-                let selectedProf = res.filter(profile => profile.isLogged === true)
-                setProfile(selectedProf[0]);
-            }
-        })
-
     }, [])
-    
+
+    useEffect(() => {
+        setLogged(props.logged);
+    }, [props.logged])
+
     return (
         <footer className="footer">
             <div className='footer-opacity'>
@@ -27,7 +24,7 @@ export const Footer = (props) => {
                     <Link to='/home'> <li className={(path === 'home') || (path !== 'login' && path !== 'search' && path !== 'profile' & path !== 'new-in') ? 'footer-item current-footer' : 'footer-item'}><i className="fa-solid fa-house"></i></li></Link>
                     <Link to='/search'><li className={path === 'search' ? 'footer-item current-footer' : 'footer-item'}><i className="fa-solid fa-magnifying-glass"></i></li></Link>
                     <Link to='/new-in'><li className={path === 'new-in' ? 'footer-item current-footer' : 'footer-item'}><i className="fa-solid fa-newspaper"></i></li></Link>
-                    <Link to='/profile'>{profile ? <img className='footer-avatar' src={profile.avatar} alt="" /> : <li className={path === 'profile' ? 'footer-item current-footer' : 'footer-item'}><i className="fa-solid fa-skull-crossbones"></i></li>}</Link>
+                    <Link to='/profile'>{logged ? <img className='footer-avatar' src={logged.avatar} alt="" /> : <span className='footer-noAvatar'></span>}</Link>
 
                 </ul>
             </div>

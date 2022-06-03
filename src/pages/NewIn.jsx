@@ -1,10 +1,23 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { Footer } from "../components/Footer"
 import { Nav } from "../components/Nav"
+import { movieServices } from "../services/movieServices";
 
 export const NewIn = () => {
 
-    useEffect(()=>{
+    const [logged, setLogged] = useState();
+
+    useEffect(() => {
+        movieServices.getProfiles().then(res => {
+            if (res) {
+                let loggedProf = res.filter(profile => profile.isLogged === true);
+                setLogged(loggedProf[0]);
+            }
+        })
+
+    }, [])
+
+    useEffect(() => {
         swipeBack();
     })
 
@@ -29,11 +42,11 @@ export const NewIn = () => {
 
     return (
         <section className="wrapper">
-            <Nav />
+            <Nav logged={logged} />
             <main className="container">
 
             </main>
-            <Footer />
+            <Footer logged={logged} />
         </section>
     )
 }

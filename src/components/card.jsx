@@ -30,9 +30,9 @@ export const Card = (props) => {
                 </div>
                 <div className={movie ? "info-row card-font line" : 'info-row card-font skeleton'}>
                     <div className={movie ? "info-text-container line" : 'd-none'}>
-                        <p>{movie.name}</p>
+                        {/* <p>{movie.name}</p>
                         <p>{movie.year}</p>
-                        <p>{movie.genre}</p>
+                        <p>{movie.genre}</p> */}
                     </div>
                     <div className={movie ? "info-ix-container line" : 'd-none'}>
                         <p className="valoration">{movie.valoration}</p>

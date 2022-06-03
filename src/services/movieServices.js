@@ -80,5 +80,37 @@ export const movieServices = {
             return res.data;
         })
         return profiles;
+    },
+    loggProfile(profile, id) {
+        const isLogged = this.getProfiles().then(res => {
+            if (res) {
+                let loggedProfile = res.filter(profile => profile.isLogged === true)
+                let lastLogged = loggedProfile[0];
+                if (lastLogged) {
+                    lastLogged.isLogged = false;
+                    this.updateProfile(lastLogged, lastLogged.id).then(res => {
+                        if (res) {
+                            this.updateProfile(profile, id).then(res => {
+                                if (res) {
+                                    console.log(`${res.name} logged succesfully`)
+                                    return true;
+                                }
+                            })
+                            return true;
+                        }
+                    })
+                    return true;
+                } else {
+                    this.updateProfile(profile, id).then(res => {
+                        if (res) {
+                            console.log(`${res.name} logged succesfully`)
+                            return true;
+                        }
+                    })
+                    return true;
+                }
+            }
+        })
+        return isLogged;
     }
 }

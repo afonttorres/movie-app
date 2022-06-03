@@ -13,6 +13,17 @@ export const Searcher = () => {
     const [search, setSearch] = useState('');
     const [suggetions, setSuggestions] = useState([]);
     const [isLoading, setisLoading] = useState(false);
+    const [logged, setLogged] = useState();
+
+    useEffect(() => {
+        movieServices.getProfiles().then(res => {
+            if (res) {
+                let loggedProf = res.filter(profile => profile.isLogged === true);
+                setLogged(loggedProf[0]);
+            }
+        })
+
+    }, [])
 
     useEffect(() => {
         swipeBack();
@@ -61,7 +72,7 @@ export const Searcher = () => {
 
     return (
         <section className="wrapper">
-            <Nav />
+            <Nav logged={logged} />
             <div className="container">
                 <form className="searcher-form" onSubmit={handleSubmit}>
                     <input onChange={handleInputChange} name='searcher' value={search} className="font searcher-input" type="text" placeholder="Type your search!" />
@@ -74,7 +85,7 @@ export const Searcher = () => {
                 )) : null}
                 </div>
             </div>
-            <Footer />
+            <Footer logged={logged} />
         </section >
     )
 }

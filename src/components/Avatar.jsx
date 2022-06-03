@@ -3,43 +3,24 @@ import '../components/avatar.css';
 import { movieServices } from "../services/movieServices";
 
 export const Avatar = (props) => {
+    const [profile, setProfile] = useState(props.profile)
     const [name, setName] = useState(props.profile.name);
     const [avatar, setAvatar] = useState(props.profile.avatar);
     const [isLogged, setIsLogged] = useState(props.profile.isLogged);
+    const [id, setId] = useState(props.profile.id);
 
-    // useEffect(()=>{
-    //     setName(props.profile.name);
-    //     setAvatar(props.profile.avatar);
-    //     setIsLogged(props.profile.isLogged)
-    // },[props.profile])
+    useEffect(() => {
+        setName(props.profile.name);
+        setAvatar(props.profile.avatar);
+        setIsLogged(props.profile.isLogged)
+    }, [props.profile])
 
-    // const updateProfile = () => {
+    const updateProfile = () => {
+        props.loggin(profile)
+    }
 
-    //     console.log('hi')
-
-    //     movieServices.getProfiles().then(res => {
-    //         if (res) {
-    //             let selectedProf = res.filter(profile => profile.isLogged === true)
-    //             let lastSelected = selectedProf[0];
-    //             lastSelected.isLogged = false;
-    //             movieServices.updateProfile(lastSelected, lastSelected.id).then(res => {
-    //                 console.log(res)
-    //             })
-    //         }
-    //     })
-
-    //     let data = props.profile;
-    //     data.isLogged = true;
-    //     movieServices.updateProfile(data, data.id).then(res => {
-    //         if (res) {
-    //             console.log(res)
-    //         }
-    //     })
-
-    
     return (
-        <article className="avatar line" >
-             {/* onClick={() => updateProfile()} */}
+        <article className="avatar line" onClick={() => updateProfile()} >
             <div className={isLogged ? "avatar-img-container line logged" : "avatar-img-container"}>
                 <img className="avatar-img" src={avatar} alt="" />
             </div>

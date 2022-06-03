@@ -9,15 +9,12 @@ import '../views/chooseProfile.css';
 
 export const ChooseProfile = (props) => {
 
-    const [profiles, setProfiles] = useState();
+    const [profiles, setProfiles] = useState(props.profiles);
 
     useEffect(() => {
-        movieServices.getProfiles().then(res => {
-            if (res) {
-                setProfiles(res)
-            }
-        })
-    }, [])
+        setProfiles(props.profiles);
+    }, [props.profiles])
+
 
     return (
         <section className='chooseProfile-container line'>
@@ -26,7 +23,7 @@ export const ChooseProfile = (props) => {
             </div>
             <p className="chooseProfile-title line">¿Quién eres?</p>
             <main className="chooseProfile-avatar-container line">{profiles ? profiles.map((profile, key) => (
-                <Link to='/home'> <Avatar key={profile.id} profile={profile} /></Link>
+                <Avatar key={profile.id} profile={profile} loggin={props.loggin}/>
             )) : null}
                 <AddProfile />
             </main>

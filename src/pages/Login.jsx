@@ -5,44 +5,57 @@ import { Footer } from "../components/Footer";
 import { Modal } from "../components/Modal";
 import { ChooseProfile } from "../views/ChooseProfile";
 import { Loader } from "../components/Loader";
+import { movieServices } from "../services/movieServices";
 
 export const Login = () => {
 
 
     const [isLoading, setIsLoading] = useState(true);
+    const [profiles, setProfiles] = useState();
+    const [logged, setLogged] = useState();
+
 
 
     useEffect(() => {
-        //swipeBack();
-        setTimeout(() => setIsLoading(false), 2000)
+        setTimeout(() => setIsLoading(false), 2000);
+        getProfData();
     }, [])
 
-    const swipeBack = () => {
-        let start;
-        let end;
-        let touched = 0;
+    const loggin = (profile) => {
 
-        window.ontouchstart = (e) => {
-            touched++
-            start = e.changedTouches[0].clientX;
-        }
-
-        window.ontouchend = (e) => {
-            touched++
-            end = e.changedTouches[0].clientX;
-
-            if (start > end && touched > 0) window.location.assign('/home');
-            else return;
-        }
+        profile.isLogged = true;
+        movieServices.loggProfile(profile, profile.id).then(res => {
+            if (res) {
+                getProfData();
+                setIsLoading(true);
+                setTimeout(() => {
+                    window.location.assign('/home');
+                }, 2000);
+                setTimeout(() => {
+                    setIsLoading(false);
+                }, 3000)
+            }
+        });
     }
+
+    const getProfData = () => {
+        movieServices.getProfiles().then(res => {
+            if (res) {
+                setProfiles(res);
+                let loggedProf = res.filter(profile => profile.isLogged === true);
+                setLogged(loggedProf[0]);
+            }
+        })
+    }
+
 
     return (
         <section className="wrapper">
-            <Nav />
+            <Nav logged={logged} />
             <main className="container">
-                <>{!isLoading ? <ChooseProfile /> : <Loader />}</>
+                <>{!isLoading ? <ChooseProfile profiles={profiles} logged={logged} loggin={loggin} /> : <Loader />}</>
             </main>
-            <Footer />
+            <Footer logged={logged} />
         </section>
     )
 }
