@@ -40,7 +40,7 @@ export const Login = () => {
         <section className="wrapper">
             <Nav />
             <main className="container">
-                <>{!isLoading ? <Link to={'/home'}><ChooseProfile /></Link> : <Loader />}</>
+                <>{!isLoading ? <ChooseProfile /> : <Loader />}</>
             </main>
             <Footer />
         </section>

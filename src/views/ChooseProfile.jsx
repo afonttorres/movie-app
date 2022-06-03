@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { AddProfile } from '../components/AddProfile';
 import { Avatar } from '../components/Avatar';
 import { ProfileButton } from '../components/ProfileButton';
@@ -17,7 +18,7 @@ export const ChooseProfile = (props) => {
             </div>
             <p className="chooseProfile-title line">¿Quién eres?</p>
             <main className="chooseProfile-avatar-container line">{profiles ? profiles.map((profile, key) => (
-                <Avatar profile={profile} />
+                <Link to={'/home'}><Avatar profile={profile} /></Link>
             )) : null}
                 <AddProfile />
             </main>
