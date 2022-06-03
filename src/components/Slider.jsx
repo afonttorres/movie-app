@@ -9,11 +9,11 @@ export const Slider = (props) => {
         setFavMovies(props.favMovies);
     }, [props.favMovies]);
 
-    // useEffect(() => {
-    //     let milisecs = 3000;
-    //     let timerID = setInterval(goNext, milisecs);
-    //     return () => clearInterval(timerID);
-    // }, [index, props.favMovies])
+    useEffect(() => {
+        let milisecs = 3000;
+        let timerID = setInterval(goNext, milisecs);
+        return () => clearInterval(timerID);
+    }, [index, props.favMovies])
 
     useEffect(() => {
         swipe();
