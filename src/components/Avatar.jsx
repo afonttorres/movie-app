@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import '../components/avatar.css';
+import { movieServices } from "../services/movieServices";
 
 export const Avatar = (props) => {
     const [name, setName] = useState(props.profile.name);
     const [avatar, setAvatar] = useState(props.profile.avatar);
-    const [isLogged, setIsLogged] = useState(props.profile.isLogged)
+    const [isLogged, setIsLogged] = useState(props.profile.isLogged);
 
     return (
         <article className="avatar line">

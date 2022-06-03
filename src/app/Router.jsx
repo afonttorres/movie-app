@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { App } from '../App';
 import { Home } from '../pages/Home';
 import { Login } from '../pages/Login';
-import { MovieInfo } from '../components/MovieInfo';
+import { MovieInfo } from '../pages/MovieInfo';
 import { Searcher } from '../pages/Searcher';
 import { Profile } from '../pages/Profile';
 import { NewIn } from '../pages/NewIn';

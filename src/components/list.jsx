@@ -49,7 +49,6 @@ export const List = (props) => {
     const deleteItem = (id) => {
         movieServices.deleteMovie(parseInt(id)).then(res => {
             if (res) {
-                console.log(res)
                 getData();
                 getFavMovies();
                 openModal(`Movie: ${res.name} erased`);
@@ -58,7 +57,6 @@ export const List = (props) => {
     }
 
     const addItem = (item) => {
-        console.log('hi')
         movieServices.postMovie(item).then(res => {
             if (res) {
                 getData();
@@ -78,7 +76,6 @@ export const List = (props) => {
     }
 
     const updateItem = (movie, id) => {
-        console.log(movie, id)
         movieServices.updateMovie(movie, parseInt(id)).then(res => {
             if (res) {
                 getData();

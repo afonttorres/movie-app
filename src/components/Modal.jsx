@@ -10,8 +10,6 @@ export const Modal = (props) => {
 
     useEffect(() => {
         checkMsg()
-        console.log(modalData)
-        console.log(msg)
     }, [])
 
     useEffect(() => {

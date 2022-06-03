@@ -13,7 +13,7 @@ export const Login = () => {
 
 
     useEffect(() => {
-        swipeBack();
+        //swipeBack();
         setTimeout(() => setIsLoading(false), 2000)
     }, [])
 

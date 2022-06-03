@@ -14,7 +14,7 @@
 
 .movie-info-img {
     border-radius: 0.75rem;
-    object-fit: cover;
+    object-fit: contain;
     height: 100%;
     width: 100%;
 }
@@ -53,11 +53,38 @@
     padding: 7%;
 }
 
+.movieInfo-goBack-button{
+    position: absolute;
+    top: 5%;
+    right: 30%;
+    color: var(--main-font-color);
+    font-size: small;
+    font-weight: 500;
+    cursor: pointer;
+    outline: none;
+    transition: 1s ease;
+    border-radius: 50%;
+    border: 1px solid var(--main-font-color);
+    opacity: 50%;
+    height: 3vh;
+    width: 3vh;
+    text-align: center;
+    line-height: 3vh;
+}
 
+.movieInfo-goBack-button:hover, .movieInfo-goBack-button:focus{
+    color: white;
+    border: 1px solid white;
+    opacity: 100%;
+    transition: 1s ease;
+}
 
 @media only screen and (max-width: 820px) {
     .movie-info-container {
-        height: 80%;
+        height: 55%;
         width: 80%;
+    }
+    .movieInfo-goBack-button{
+        display: none;
     }
 }

@@ -43,19 +43,18 @@ export const Searcher = () => {
         let s = 3;
         let ms = s * 1000;
         setisLoading(true);
+        setSearch('')
         setTimeout(() => setisLoading(false), ms)
     }
 
     const handleInputChange = (e) => {
         let value = e.target.value.toLowerCase();
         setSearch(value);
-        console.log(value);
         if (value !== '') movieServices.getSearch(value).then(res => {
             if (res) {
                 setSuggestions(res)
-                setSearch('')
             }
-            
+
         });
         else setSuggestions([]);
     }

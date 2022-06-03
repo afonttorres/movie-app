@@ -18,7 +18,7 @@ export const ChooseProfile = (props) => {
             </div>
             <p className="chooseProfile-title line">¿Quién eres?</p>
             <main className="chooseProfile-avatar-container line">{profiles ? profiles.map((profile, key) => (
-                <Link to={'/home'}><Avatar profile={profile} /></Link>
+                <Link to={'/home'}><Avatar key={profile.id} profile={profile} /></Link>
             )) : null}
                 <AddProfile />
             </main>

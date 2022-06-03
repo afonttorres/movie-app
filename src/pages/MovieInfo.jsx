@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { Nav } from './Nav';
-import { Footer } from './Footer';
-import '../components/movieinfo.css';
+import { Nav } from '../components/Nav';
+import { Footer } from '../components/Footer';
 import { useParams } from "react-router-dom";
 import { movieServices } from "../services/movieServices";
+import { Link } from "react-router-dom";
+import '../pages/movieinfo.css';
 
 
 export const MovieInfo = () => {
@@ -26,7 +27,7 @@ export const MovieInfo = () => {
             touched++
             start = e.changedTouches[0].clientX;
         }
-        
+
         window.ontouchend = (e) => {
             touched++
             end = e.changedTouches[0].clientX;
@@ -40,6 +41,7 @@ export const MovieInfo = () => {
         <section className="wrapper ">
             <Nav />
             <div className="container">
+                <Link to='/home'><p className="movieInfo-goBack-button"><i className="fa-solid fa-xmark"></i></p></Link>
                 {movieInfo ?
                     <article className='movie-info-container'>
                         <img className="movie-info-img" src={movieInfo.imgUrl} alt="" />
