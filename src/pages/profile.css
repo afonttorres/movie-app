@@ -42,4 +42,7 @@
         justify-content: flex-start;
         gap: 5%;
     }
+    .profile-button-container{
+        width: 80%;
+    }
 }
