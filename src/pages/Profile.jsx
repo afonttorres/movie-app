@@ -9,16 +9,24 @@ import { Avatar } from "../components/Avatar";
 import { Setting } from '../components/Setting';
 import { ProfileButton } from '../components/ProfileButton';
 import { Link } from 'react-router-dom';
+import { movieServices } from '../services/movieServices';
 
 export const Profile = (props) => {
 
-    const [profiles, setProfiles] = useState(data);
+    const [profiles, setProfiles] = useState();
     const [settings, setSettings] = useState(profileSettings);
 
-
-    useEffect(()=>{
+    useEffect(() => {
         swipeBack();
     })
+
+    useEffect(() => {
+        movieServices.getProfiles().then(res => {
+            if (res) {
+                setProfiles(res)
+            }
+        })
+    }, [])
 
     const swipeBack = () => {
         let start;

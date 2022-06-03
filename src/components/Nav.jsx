@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import profilesData from '../profiles.json';
 import '../components/nav.css'
+import { movieServices } from "../services/movieServices";
 
 export const Nav = () => {
     const [path, setPath] = useState(window.location.pathname.slice(1, window.location.pathname.length));
@@ -10,9 +11,12 @@ export const Nav = () => {
     useEffect(() => {
         setPath(window.location.pathname.slice(1, window.location.pathname.length))
 
-        let selectedProf = profilesData.filter(profile => profile.isLogged === true)
-        setProfile(selectedProf[0]);
-
+        movieServices.getProfiles().then(res => {
+            if (res) {
+                let selectedProf = res.filter(profile => profile.isLogged === true)
+                setProfile(selectedProf[0]);
+            }
+        })
     }, [])
 
     return (

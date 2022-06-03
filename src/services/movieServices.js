@@ -1,4 +1,6 @@
 import axios from 'axios';
+// import jsonfile from 'jsonfile';
+// const file = '../profiles.json'
 
 const baseURL = 'https://6286352d96bccbf32d713c70.mockapi.io'
 
@@ -55,5 +57,28 @@ export const movieServices = {
             })
         })
         return search;
+    },
+    readFile() {
+        // jsonfile.readFile(file, function (err, data) {
+        //     if (err) console.error(err)
+        //     console.dir(data)
+        //   })
+    },
+    writeFile(obj) {
+        // jsonfile.writeFile(file, obj, function (err) {
+        //     if (err) console.error(err)
+        // })
+    },
+    getProfiles() {
+        const profiles = axios.get(`https://6299dd976f8c03a9784ba7b0.mockapi.io/profiles`).then(res => {
+            return res.data;
+        })
+        return profiles;
+    },
+    updateProfile(profile, id) {
+        const profiles = axios.put(`https://6299dd976f8c03a9784ba7b0.mockapi.io/profiles/${id}`, profile).then(res => {
+            return res.data;
+        })
+        return profiles;
     }
 }

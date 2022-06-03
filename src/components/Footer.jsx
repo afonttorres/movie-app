@@ -3,6 +3,7 @@ import profilesData from '../profiles.json';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Avatar } from './Avatar';
+import { movieServices } from '../services/movieServices';
 
 export const Footer = (props) => {
     const [path, setPath] = useState(window.location.pathname.slice(1, window.location.pathname.length));
@@ -10,13 +11,15 @@ export const Footer = (props) => {
 
     useEffect(() => {
         setPath(window.location.pathname.slice(1, window.location.pathname.length))
-
-        let selectedProf = profilesData.filter(profile => profile.isLogged === true)
-        setProfile(selectedProf[0]);
-
+        movieServices.getProfiles().then(res => {
+            if (res) {
+                let selectedProf = res.filter(profile => profile.isLogged === true)
+                setProfile(selectedProf[0]);
+            }
+        })
 
     }, [])
-
+    
     return (
         <footer className="footer">
             <div className='footer-opacity'>
