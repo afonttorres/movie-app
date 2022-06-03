@@ -5,7 +5,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 15%;
+    gap: 4vh;
+    position: relative;
 }
 
 .chooseProfile-title {
@@ -13,20 +14,29 @@
     font-family: var(--main-font);
     color: var(--main-font-color);
     font-weight: 800;
+    height: 5vh;
+    width: fit-content;
+    position: relative;
+    line-height: 5vh;
 }
 
 .chooseProfile-avatar-container {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    height: 55vh;
+    overflow: scroll;
+    padding-bottom: 10vh;
 }
 
 .chooseProfile-profile-button-container{
-    height: 10vh;
-    position: absolute;
+    height: 12vh;
+    position: relative;
     width: inherit;
-    top: 5vh;
+    display: flex;
+    align-items: center;
 }
 
 /* .line{

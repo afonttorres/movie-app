@@ -49,11 +49,24 @@ export const Login = () => {
     }
 
 
+    const addProfile = (profile) => {
+        movieServices.postProfile(profile).then(res => {
+            if (res) {
+                getProfData();
+                setIsLoading(true);
+                setTimeout(() => {
+                    setIsLoading(false);
+                }, 3000)
+            }
+        })
+    }
+
+
     return (
         <section className="wrapper">
             <Nav logged={logged} />
             <main className="container">
-                <>{!isLoading ? <ChooseProfile profiles={profiles} logged={logged} loggin={loggin} /> : <Loader />}</>
+                <>{!isLoading ? <ChooseProfile profiles={profiles} logged={logged} loggin={loggin} addProfile={addProfile} /> : <Loader />}</>
             </main>
             <Footer logged={logged} />
         </section>

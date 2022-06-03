@@ -8,13 +8,16 @@
 }
 
 .avatar-container {
-    width: 55%;
+    width: 75%;
     margin-top: 5vh;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 5%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    padding-left: 15%;
+    padding-right: 15%;
 
 }
 
@@ -35,6 +38,8 @@
 
 @media only screen and (max-width: 820px) {
     .avatar-container {
-        width: 75%;
+        width: 85%;
+        justify-content: flex-start;
+        gap: 5%;
     }
 }

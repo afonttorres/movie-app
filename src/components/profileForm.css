@@ -1,0 +1,125 @@
+.profile-formAndPreview-opacity {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--opacity);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+}
+
+.profile-formAndPreview-container {
+    position: relative;
+    z-index: 4;
+    height: 50%;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(2, 0, 36, 95%);
+    border-radius: 0.75rem;
+    text-align: center;
+    gap: 2%;
+    z-index: 4;
+}
+
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    height: 50%;
+    width: 85%;
+    align-items: center;
+    justify-content: center;
+    gap: 5%;
+}
+
+.profile-form input {
+    width: 75%;
+    margin: 2.5% auto;
+    border-radius: 0.25rem;
+    border: 1px solid var(--bg);
+    color: var(--bg);
+    outline: none;
+    padding-left: 2.5%;
+    font-family: var(--main-font);
+    height: 20%;
+    background-color: rgba(255, 255, 255, 95%);
+}
+
+.profile-preview-container {
+    height: 50%;
+    width: 85%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5%;
+}
+
+.profile-preview-img {
+    border: 4px solid var(--main-font-color);
+    height: 50%;
+    width: 35%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-preview-name {
+    height: fit-content;
+    font-family: var(--main-font);
+    font-size: small;
+    font-weight: 800;
+    color: var(--main-font-color);
+    text-transform: capitalize;
+    width: 25%;
+}
+
+.profile-formAndPreview-closeButton {
+    height: 5%;
+    width: 5%;
+    margin: 1%;
+    font-weight: bold;
+    font-size: small;
+    color: var(--main-font-color);
+    display: block;
+    align-self: flex-end;
+    cursor: pointer;
+    position: absolute;
+    top: 5%;
+    right: 5%;
+}
+
+.profile-form-button {
+    background-color: var(--opacity);
+    height: 20%;
+    width: 40%;
+    color: var(--main-font-color);
+    border-radius: 0.25rem;
+    border: 1px solid var(--main-font-color);
+    font-size: small;
+    font-family: var(--main-font);
+    cursor: pointer;
+    outline: none;
+    transition: 1s ease;
+}
+
+.profile-form-button:hover,
+.profile-form-button:focus {
+    background-color: var(--big-button-color);
+    color: white;
+    border: 1px solid white;
+    transition: 1s ease;
+}
+.visibility{
+    visibility: hidden;
+}
+
+@media only screen and (max-width: 820px) {
+    .profile-formAndPreview-container {
+        width: 90%;
+    }
+}

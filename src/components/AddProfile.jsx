@@ -1,10 +1,10 @@
 import { useState } from "react";
 import '../components/addProfile.css';
 
-export const AddProfile = () => {
+export const AddProfile = (props) => {
 
     return (
-        <article className="addProfile line">
+        <article className="addProfile line" onClick={() => props.openForm()}>
             <div className="addProfile-img-container line">
                 <span className="addProfile-button">+</span>
             </div>

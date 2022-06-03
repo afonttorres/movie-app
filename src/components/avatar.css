@@ -51,4 +51,5 @@
 .avatar-font {
     font-weight: 800;
     font-size: medium !important;
+    text-transform: capitalize;
 }

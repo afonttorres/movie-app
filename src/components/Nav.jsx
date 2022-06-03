@@ -10,7 +10,7 @@ export const Nav = (props) => {
 
     useEffect(() => {
         setPath(window.location.pathname.slice(1, window.location.pathname.length));
-    },[])
+    }, [])
 
     useEffect(() => {
         setLogged(props.logged);
