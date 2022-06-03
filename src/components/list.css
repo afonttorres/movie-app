@@ -21,7 +21,7 @@
     overflow-y: scroll;
 }
 
-.scrollable-content{
+.scrollable-content {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -64,8 +64,8 @@
 }
 
 .open-form-button {
-    height: 5vh;
-    width: 5vh;
+    height: 6vh;
+    width: 6vh;
     border-radius: 0.25rem;
     border: 2px solid var(--main-font-color);
     color: var(--main-font-color);
@@ -83,9 +83,10 @@
 /*still 20% up inside container in mobile */
 
 @media only screen and (max-width: 820px) {
-    .list{
+    .list {
         height: 25vh;
     }
+
     .list-title {
         margin-left: 10%;
     }
@@ -102,7 +103,13 @@
         top: 33.5vh;
         height: 56.5vh;
     }
-    .scrollable-content{
+
+    .scrollable-content {
         gap: 1vh;
+    }
+
+    .open-form-button {
+        height: 5vh;
+        width: 5vh;
     }
 }

@@ -26,13 +26,6 @@ export const Modal = (props) => {
     const checkMsg = () => {
         if (msg.includes('?')) setIsQuestion(true);
         else setIsQuestion(false);
-
-        // const actions = ['delete', 'update', 'add'];
-        // actions.forEach(action => {
-        //     if (msg.includes(action)) setAction(action);
-        // })
-
-        // setId(parseInt(msg.slice((msg.indexOf(':') + 2), (msg.length - 2))));
     }
 
     const closeModal = () => {

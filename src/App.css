@@ -22,13 +22,14 @@
     /*elements*/
     --wrapper-color: var(--bg);
     --container-color: var(--opacity);
-    --main-font-color: white;
+    --main-font-color: #f9f9f9;;
     --border-color: var(--light-gray);
     --main-font: 'Mulish', sans-serif;
     --border-radius: .75rem;
     --img: '/assets/shrek.jpg';
     --main-font-size: small;
     --main-font-sizeMP: smaller;
+    --big-button-color: #40424a;
 
 }
 

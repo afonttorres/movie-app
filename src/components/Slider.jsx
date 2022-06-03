@@ -9,11 +9,15 @@ export const Slider = (props) => {
         setFavMovies(props.favMovies);
     }, [props.favMovies]);
 
+    // useEffect(() => {
+    //     let milisecs = 3000;
+    //     let timerID = setInterval(goNext, milisecs);
+    //     return () => clearInterval(timerID);
+    // }, [index, props.favMovies])
+
     useEffect(() => {
-        let milisecs = 3000;
-        let timerID = setInterval(goNext, milisecs);
-        return () => clearInterval(timerID);
-    }, [index, props.favMovies])
+        swipe();
+    })
 
     const goBack = () => {
         (index < 1) ? setIndex(favMovies.length - 1) : setIndex(index - 1);
@@ -27,9 +31,33 @@ export const Slider = (props) => {
         setIndex(i);
     }
 
+
+    const swipe = () => {
+        let start;
+        let end;
+        let touched = 0;
+
+        window.ontouchstart = (e) => {
+            touched++
+            start = e.changedTouches[0].clientX;
+        }
+
+        window.ontouchend = (e) => {
+            touched++
+            end = e.changedTouches[0].clientX;
+
+            console.log('start:', start, 'end:', end, touched)
+
+            if (start > end && touched === 2) (index < 1) ? setIndex(favMovies.length - 1) : setIndex(index - 1);
+            else if (end > start && touched === 2) (index === favMovies.length - 1) ? setIndex(0) : setIndex(index + 1);
+            else return;
+        }
+    }
+
     return (
         <div className="slider">
-            <span onClick={goBack} className='slider-button'><i className="fa-solid fa-angle-left"></i></span>
+            <span onClick={goBack} style={{ left: '7%' }} className='slider-button'><i className="fa-solid fa-angle-left"></i></span>
+
             <div className='slider-container'>
                 {favMovies ? favMovies.map((movie, key) =>
                     <>{key === index ?
@@ -40,7 +68,8 @@ export const Slider = (props) => {
                 ) : null}
                 <ul className='dot-container'>{favMovies ? favMovies.map((movie, key) => <li key={key} onClick={() => changeIndex(key)} className='dot'><i className={key === index ? "fa-solid fa-circle selected-dot" : 'fa-solid fa-circle'}></i></li>) : null}</ul>
             </div>
-            <span onClick={goNext} className='slider-button'><i className="fa-solid fa-angle-right"></i></span>
+
+            <span onClick={goNext} style={{ right: '7%' }} className='slider-button'><i className="fa-solid fa-angle-right"></i></span>
         </div>
     )
 }

@@ -51,7 +51,7 @@
     width: fit-content;
     border: 1px solid var(--bg);
     border-radius: 0.35rem;
-    color: var(--bg);
+    color: var(--bg) !important;
     outline: none;
     padding: 2.5% 15%;
     font-size: var(--main-font-size);

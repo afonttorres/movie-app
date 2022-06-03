@@ -1,13 +1,21 @@
-import { Component, useEffect } from "react";
+import { Component, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Nav } from "../components/Nav";
 import { Footer } from "../components/Footer";
 import { Modal } from "../components/Modal";
+import { ChooseProfile } from "../views/ChooseProfile";
+import { Loader } from "../components/Loader";
 
 export const Login = () => {
+
+
+    const [isLoading, setIsLoading] = useState(true);
+
+
     useEffect(() => {
         swipeBack();
-    })
+        setTimeout(() => setIsLoading(false), 2000)
+    }, [])
 
     const swipeBack = () => {
         let start;
@@ -31,9 +39,9 @@ export const Login = () => {
     return (
         <section className="wrapper">
             <Nav />
-            <div className="container">
-               
-            </div>
+            <main className="container">
+                <>{!isLoading ? <Link to={'/home'}><ChooseProfile /></Link> : <Loader />}</>
+            </main>
             <Footer />
         </section>
     )

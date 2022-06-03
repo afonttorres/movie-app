@@ -51,27 +51,28 @@ export const Searcher = () => {
         setSearch(value);
         console.log(value);
         if (value !== '') movieServices.getSearch(value).then(res => {
-            if (res) setSuggestions(res)
+            if (res) {
+                setSuggestions(res)
+                setSearch('')
+            }
+            
         });
         else setSuggestions([]);
     }
-
-
-    console.log(isLoading);
 
     return (
         <section className="wrapper">
             <Nav />
             <div className="container">
                 <form className="searcher-form" onSubmit={handleSubmit}>
-                    <input onChange={handleInputChange} value={search} className="font searcher-input" type="text" name="searcher" placeholder="Type your search!" />
+                    <input onChange={handleInputChange} name='searcher' value={search} className="font searcher-input" type="text" placeholder="Type your search!" />
                     <button className="searcher-button"><i className="fa-solid fa-magnifying-glass"></i></button>
                 </form>
                 <>{isLoading ? <Loader /> : null}</>
-                <div className={!isLoading ? 'suggestions-container' : 'd-none'}>{suggetions.map((suggestion, key) => (
+                <div className='suggestions-container'>{!isLoading ? suggetions.map((suggestion, key) => (
                     <Link to={`/movie-info/${suggestion.id}`}> <img src={suggestion.imgUrl} alt="" className="card-font suggestion" key={key} /></Link>
 
-                ))}
+                )) : null}
                 </div>
             </div>
             <Footer />

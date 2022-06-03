@@ -8,7 +8,7 @@
     background-color: var(--bg);
 }
 
-.nav-opacity{
+.nav-opacity {
     background-color: rgba(0, 0, 0, 35%);
     height: 100%;
     width: 100%;
@@ -23,31 +23,72 @@
     align-items: center;
     justify-content: flex-start;
     gap: 5%;
+    position: relative;
 }
 
 .nav-item {
-    font-size: larger;
     font-weight: bold;
     color: var(--main-font-color);
     height: fit-content;
     width: fit-content;
+    font-family: var(--main-font);
+    font-size: small;
+    transition: 1s ease;
+}
+
+.nav-item:hover, .nav-item:focus{
+    color: white;
+    font-size: medium;
+    transition: 1s ease;
 }
 
 .main-nav-item {
-    font-size: xx-large;
+    font-size: x-large;
 }
 
 .nav-item a {
-    color: white;
+    color: rgba(255, 255, 255, 80%);
     text-decoration: none;
+}
+
+.nav-avatar {
+    width: 17vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 0;
+    gap: 10%;
+}
+
+.nav-avatar-img {
+    height: 7vh;
+    width: 7vh;
+    object-fit: cover;
+    border-radius: 50%;
+    object-position: center;
+    opacity: 80%;
+    outline: none;
+    position: relative;
+    right: 0;
+    transition: 1s ease;
+}
+
+.nav-avatar-img:hover,
+.nav-avatar-img:focus {
+    border: 2px solid var(--main-font-color);
+    box-shadow: none;
+    opacity: 100%;
+    transition: 1s ease;
 }
 
 ::marker {
     content: none;
 }
 
-.current-nav{
-    font-size: x-large;
+.current-nav {
+    font-size: medium;
 }
 
 @media only screen and (max-width: 820px) {

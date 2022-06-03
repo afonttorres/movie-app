@@ -1,0 +1,30 @@
+.edit-profile-button {
+    height: 50%;
+    width: 14%;
+    position: relative;
+    margin: auto;
+    display: block;
+    background-color: var(--big-button-color);
+    border: 1px solid var(--opacity);
+    color: rgba(255, 255, 255, 80%);
+    border-radius: 0.25rem;
+    font-size: small;
+    outline: none;
+    cursor: pointer;
+    transition: 1s ease;
+}
+
+.edit-profile-button:hover, .edit-profile-button:focus{
+    opacity: 80%;
+    color: var(--main-font-color);
+    border: 2px solid var(--opacity);
+    transition: 1s ease;
+}
+
+@media only screen and (max-width: 820px) {
+    .edit-profile-button{
+        width: 65%;
+        font-size: large;
+    }
+    
+}

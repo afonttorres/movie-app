@@ -1,0 +1,19 @@
+[
+    {   "id":1,
+        "name": "Agnès",
+        "avatar": "https://www.xtrafondos.com/wallpapers/resized/pascal-de-enredados-2151.jpg?s=large",
+        "isLogged": true
+    },
+    {
+        "id":2,
+        "name": "Sira",
+        "avatar": "https://i.pinimg.com/564x/34/94/a0/3494a0bd05a53b10c19b293c0c58c041.jpg",
+        "isLogged": false
+    },
+    {
+        "id":3,
+        "name": "Nil",
+        "avatar": "http://pm1.narvii.com/7368/3395706226d59928e3d913419942fd83aef0cf9fr1-350-338v2_uhq.jpg",
+        "isLogged": false
+    }
+]

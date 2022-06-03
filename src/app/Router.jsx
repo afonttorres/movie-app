@@ -6,6 +6,8 @@ import { Home } from '../pages/Home';
 import { Login } from '../pages/Login';
 import { MovieInfo } from '../components/MovieInfo';
 import { Searcher } from '../pages/Searcher';
+import { Profile } from '../pages/Profile';
+import { NewIn } from '../pages/NewIn';
 
 export default function Router() {
     return (
@@ -16,6 +18,8 @@ export default function Router() {
                 <Route path='/login' element={<Login />}></Route>
                 <Route path='/search' element={<Searcher />}></Route>
                 <Route path='/movie-info/:id' element={<MovieInfo />}></Route>
+                <Route path='/profile' element={<Profile />}></Route>
+                <Route path='/new-in' element={<NewIn />}></Route>
             </Routes>
         </BrowserRouter>
     )
