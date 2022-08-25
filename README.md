@@ -82,5 +82,13 @@ This project was bootstrapped with Create React App therefore requires node.js a
 ```bash
  npm start
  ``` 
+## Authors
++ [@afonttorres](https://github.com/afonttorres)
+
+#### Contact me:
+
+[Email](mailto:afonttorres@gmail.com)
+
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/agnes-font-torres/)
 
 
