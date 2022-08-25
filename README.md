@@ -52,7 +52,7 @@ The objective of this project is to put in practice the CRUD operations in the u
 ![App Screenshot](./assets/desk/upload-desk.png)
 ![App Screenshot](./assets/desk/upload-modal-desk.png)
 ![App Screenshot](./assets/desk/user-settings-desk.png)
-![App Screenshot](./assets/desk/user-settings-desk.png)
+![App Screenshot](./assets/desk/update-user-settings-desk.png)
 ![App Screenshot](./assets/desk/user-update-desk.png)
 
 ### Mobile
