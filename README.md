@@ -5,6 +5,7 @@ This React app based on Disney's App/Website design allows the user to log himse
 ## Tech Stack
 + HTML 5
 + CSS 3
++ ES6
 + REACT
 
 ### Rest API
