@@ -21,7 +21,7 @@ This React app based on Disney's App/Website design allows the user to log himse
 + Axios
 
 ## Objectives
-The objective of this project is to put in practice the CRUD operations in the user favourite movies' by combining the front-end tech stack with the mockAPI which works as a Rest API that enables the app to download data from.
+The objective of this project is to put in practice the CRUD operations in the user favourite movies' by combining the front-end tech stack with the mockAPI which works as a Rest API that enables the app to download data.
 
 ## Features
 ### Favourite Movies CRUD
