@@ -1,11 +1,10 @@
-import { Component, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { Nav } from "../components/Nav";
 import { Footer } from "../components/Footer";
-import { Modal } from "../components/Modal";
 import { ChooseProfile } from "../views/ChooseProfile";
 import { Loader } from "../components/Loader";
 import { movieServices } from "../services/movieServices";
+import { EditProfile } from "../views/EditProfie";
 
 export const Login = () => {
 
@@ -13,6 +12,7 @@ export const Login = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [profiles, setProfiles] = useState();
     const [logged, setLogged] = useState();
+    const [isEditMode, setIsEditMode] = useState(false);
 
 
 
@@ -61,12 +61,28 @@ export const Login = () => {
         })
     }
 
+    const updateProfile = (profile) => {
+        movieServices.updateProfile(profile, profile.id).then(res => {
+            if (res) {
+                getProfData();
+                setIsLoading(true);
+                setTimeout(() => {
+                    setIsLoading(false);
+                }, 3000)
+            }
+        })
+    }
+
+    const closeEditProfile = () =>{
+        setIsEditMode(false);
+    }
+
 
     return (
         <section className="wrapper">
             <Nav logged={logged} />
             <main className="container">
-                <>{!isLoading ? <ChooseProfile profiles={profiles} logged={logged} loggin={loggin} addProfile={addProfile} /> : <Loader />}</>
+                <>{isLoading ? <Loader /> : <>{!isEditMode ? <ChooseProfile profiles={profiles} logged={logged} loggin={loggin} addProfile={addProfile} updateProfile={updateProfile} setIsEditMode={setIsEditMode} /> : <EditProfile profiles={profiles} isEditMode={isEditMode} updateProfile={updateProfile} closeEditProfile={closeEditProfile} />}</>}</>
             </main>
             <Footer logged={logged} />
         </section>

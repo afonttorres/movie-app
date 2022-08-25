@@ -53,3 +53,16 @@
     font-size: medium !important;
     text-transform: capitalize;
 }
+
+.editMode-button{
+    color: var(--bg);
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 1rem;
+    height: 3vh;
+    width: 3vh;
+    line-height: 3.2vh;
+}

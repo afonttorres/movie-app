@@ -1,0 +1,17 @@
+.editProfile-closeButton{
+    height: fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin: 1%;
+    font-weight: bold;
+    font-size: small;
+    color: var(--main-font-color);
+    display: block;
+    align-self: flex-end;
+    cursor: pointer;
+    position: absolute;
+    top: 0%;
+    right: 5%;
+    line-height: 3.5;
+    text-align: center;
+}

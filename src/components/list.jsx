@@ -155,7 +155,7 @@ export const List = (props) => {
                     </div>
                     <div className='list-card-container'>
                         {movies.map((movie, key) => (
-                            <>{!isLoading ? <Card key={key} movie={movie} deleteItem={deleteItem} toggleForm={toggleForm} nextMovieToPreview={nextMovieToPreview} fav={fav} askConfirmation={askConfirmation} /> : null}</>
+                            <>{!isLoading ? <Card key={movie.id} movie={movie} deleteItem={deleteItem} toggleForm={toggleForm} nextMovieToPreview={nextMovieToPreview} fav={fav} askConfirmation={askConfirmation} /> : null}</>
                         )).reverse()}
                     </div>
                 </div>
@@ -167,7 +167,7 @@ export const List = (props) => {
                     </div>
                     <div className='list-card-container'>
                         {favMovies.map((movie, key) => (
-                            <>{!isLoading ? <Card key={key} movie={movie} deleteItem={deleteItem} toggleForm={toggleForm} nextMovieToPreview={nextMovieToPreview} fav={fav} askConfirmation={askConfirmation} /> : null}</>
+                            <>{!isLoading ? <Card key={movie.id} movie={movie} deleteItem={deleteItem} toggleForm={toggleForm} nextMovieToPreview={nextMovieToPreview} fav={fav} askConfirmation={askConfirmation} /> : null}</>
                         )).reverse()}
                     </div>
                 </div>
@@ -178,7 +178,7 @@ export const List = (props) => {
                     </div>
                     <div className='list-card-container'>
                         {favMovies.map((movie, key) => (
-                            <>{!isLoading ? <Card key={key} movie={movie} deleteItem={deleteItem} toggleForm={toggleForm} nextMovieToPreview={nextMovieToPreview} fav={fav} askConfirmation={askConfirmation} /> : null}</>
+                            <>{!isLoading ? <Card key={movie.id} movie={movie} deleteItem={deleteItem} toggleForm={toggleForm} nextMovieToPreview={nextMovieToPreview} fav={fav} askConfirmation={askConfirmation} /> : null}</>
                         )).reverse()}
                     </div>
                 </div>

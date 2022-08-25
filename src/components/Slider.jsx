@@ -62,11 +62,11 @@ export const Slider = (props) => {
                 {favMovies ? favMovies.map((movie, key) =>
                     <>{key === index ?
                         <div key={key} className='slider-text-container'>
-                            <img className='slider-img' src={movie.imgUrl} alt='Movie' />
-                            <p className='slider-text font'>{movie.name}</p>
+                            <img className='slider-img' src={movie.imgUrl} alt='Movie' key={key}/>
+                            <p className='slider-text font' key={key}>{movie.name}</p>
                         </div> : null}</>
                 ) : null}
-                <ul className='dot-container'>{favMovies ? favMovies.map((movie, key) => <li key={key} onClick={() => changeIndex(key)} className='dot'><i className={key === index ? "fa-solid fa-circle selected-dot" : 'fa-solid fa-circle'}></i></li>) : null}</ul>
+                <ul className='dot-container'>{favMovies ? favMovies.map((movie, key) => <li key={movie.id} onClick={() => changeIndex(key)} className='dot'><i className={key === index ? "fa-solid fa-circle selected-dot" : 'fa-solid fa-circle'}></i></li>) : null}</ul>
             </div>
 
             <span onClick={goNext} style={{ right: '7%' }} className='slider-button'><i className="fa-solid fa-angle-right"></i></span>

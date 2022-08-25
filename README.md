@@ -1,70 +1,85 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Movie App
+This React app based on Disney's App/Website design allows the user to log himself in by choosing their avatar and apply the whole CRUD to his list of favourite movies.
 
-## Available Scripts
+## Tech Stack
++ HTML 5
++ CSS 3
++ REACT
 
-In the project directory, you can run:
+### Rest API
++ Mock API
 
-### `npm start`
+### Version control
++ GIT
++ Git Hub
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Development tools & libraries
++ Visual Studio Code
++ Postman
++ Axios
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Objectives
+The objective of this project is to put in practice the CRUD operations in the user favourite movies' by combining the front-end tech stack with the mockAPI which works as a Rest API that enables the app to download data from.
 
-### `npm test`
+## Features
+### Favourite Movies CRUD
++ Publish a favourite movie
++ Update a favourite movie
++ Delete a favourite movie
++ Like a favourite movie
++ Display the whole list of favourite movies
++ Display a list of the liked favourite movies 
++ Display the favourite movie details
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### User CRUD
++ Login
++ Register
++ Update his profile
++ Delete his profile
++ Search a movie by its title
 
-### `npm run build`
+### Design
++ Responsive Web Design
++ Modularity and Scalability (by using React components)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Preview
+### Desktop
+![App Screenshot](./assets/desk/login-desk.png)
+![App Screenshot](./assets/desk/home-desk.png)
+![App Screenshot](./assets/desk/detail-desk.png)
+![App Screenshot](./assets/desk/searcher-desk.png)
+![App Screenshot](./assets/desk/upload-desk.png)
+![App Screenshot](./assets/desk/upload-modal-desk.png)
+![App Screenshot](./assets/desk/user-settings-desk.png)
+![App Screenshot](./assets/desk/user-settings-desk.png)
+![App Screenshot](./assets/desk/user-update-desk.png)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Mobile
+![App Screenshot](./assets/mobile/login-mb.png)
+![App Screenshot](./assets/mobile/home-mb.png)
+![App Screenshot](./assets/mobile/detail-mb.png)
+![App Screenshot](./assets/mobile/searcher-mb.png)
+![App Screenshot](./assets/mobile/update-mb.png)
+![App Screenshot](./assets/mobile/update-modal-mb.png)
+![App Screenshot](./assets/mobile/user-settings-mb.png)
+![App Screenshot](./assets/mobile/update-user-settings-mb.png)
+![App Screenshot](./assets/mobile/user-update-mb.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Installation
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+This project was bootstrapped with Create React App therefore requires node.js and npm.  Once you've verified node is installed in your directory take the following steps:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### 1. Clone the repository
+```bash
+ git clone https://github.com/afonttorres/movie-app.git
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#### 2. Run the app in development mode
+```bash
+ npm start
+ ``` 
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

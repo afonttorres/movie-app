@@ -8,6 +8,7 @@ import { MovieInfo } from '../pages/MovieInfo';
 import { Searcher } from '../pages/Searcher';
 import { Profile } from '../pages/Profile';
 import { NewIn } from '../pages/NewIn';
+import { EditProfile } from '../views/EditProfie';
 
 export default function Router() {
     return (
@@ -20,6 +21,7 @@ export default function Router() {
                 <Route path='/movie-info/:id' element={<MovieInfo />}></Route>
                 <Route path='/profile' element={<Profile />}></Route>
                 <Route path='/new-in' element={<NewIn />}></Route>
+                <Route path='/edit-profile' element={<EditProfile />}></Route>
             </Routes>
         </BrowserRouter>
     )
