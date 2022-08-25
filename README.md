@@ -1,5 +1,5 @@
 
-# Movie App
+# Movie App 🎥🍿
 This React app based on Disney's App/Website design allows the user to log himself in by choosing their avatar and apply the whole CRUD to his list of favourite movies.
 
 ## Tech Stack
